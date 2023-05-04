@@ -1,0 +1,89 @@
+@import '../../variables.scss';
+
+header {
+    width: 100vw;
+    position: sticky;
+    top: 0;
+    background-color: var(--bg-color);
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 1rem;
+    height: 56.4px;
+    z-index: 1;
+
+    @media screen and (min-width: $mid-break) {
+        padding: 1rem 1.8rem;
+        height: 80px;
+    }
+}
+
+.home-link {
+    font-size: 1.75rem;
+    line-height: 1.4;
+
+    @media screen and (min-width: $mid-break) {
+        line-height: 1.8;
+    }
+}
+
+.nav-links {
+    display: none;
+    font-size: 1.25rem;
+
+    @media screen and (min-width: $mid-break) {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+    }
+}
+
+.nav-links a {
+    margin-bottom: 1px;
+}
+
+.mobile-toggle-wrapper {
+    margin-top: 0.2rem;
+    @media screen and (min-width: $mid-break) {
+        display: none;
+    }
+}
+
+.burger {
+    display: flex;
+    outline: none;
+    width: 25px;
+    border: 0px;
+    padding: 0px;
+    margin-top: 15px;
+    background: transparent;
+    transition: all 250ms ease-out;
+    cursor: pointer;
+}
+
+.burger:before, .burger:after {
+    content: '';
+    width: 25px;
+    height: 3px;
+    position: absolute;
+    background: #1a1a1a;
+    transition: all 250ms ease-out;
+    will-change: transform;
+}
+
+.burger:before {
+    transform: translateY(-4.5px);
+}
+
+.burger:after {
+    transform: translateY(4.5px);
+}
+
+// line transition
+
+.active.burger:before {
+    transform: translateY(0) rotate(45deg);
+}
+
+.active.burger:after {
+    transform: translateY(0) rotate(-45deg);
+}

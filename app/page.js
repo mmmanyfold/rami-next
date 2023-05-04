@@ -2,7 +2,7 @@
 import "./page.scss";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
-import ProjectsGrid from "../components/ProjectsGrid/index.js";
+import ProjectsGrid from "../components/ProjectsGrid";
 // import Footnotes from "../lib/Footnotes.svelte";
 import { loadProjects } from "./api.js";
 
