@@ -7,10 +7,10 @@ const ListItem = ({ item }) => {
       {item["url"] || item["download"] ? (
         <a href={item["url"] || item["download"][0]["url"]}>
           {item["line-1"] && (
-            <>
-              <RichTextCollection objects={item["line-1"]} color="#000000" />
+            <span className="title">
+              <RichTextCollection objects={item["line-1"]} />
               <br />
-            </>
+            </span>
           )}
           {item["line-2"] && (
             <>
@@ -29,10 +29,10 @@ const ListItem = ({ item }) => {
       ) : (
         <>
           {item["line-1"] && (
-            <>
-              <RichTextCollection objects={item["line-1"]} color="#000000" />
+            <span className="title">
+              <RichTextCollection objects={item["line-1"]} />
               <br />
-            </>
+            </span>
           )}
           {item["line-2"] && (
             <>

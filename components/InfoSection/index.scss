@@ -22,11 +22,18 @@
             line-height: 1.35;
             color: $secondary-color;
         }
+
+        .title {
+            color: var(--text-color);   
+        }
     
         a {
             color: $secondary-color;
             &:hover {
                 color: $accent-color !important;
+                .title {
+                    color: inherit;
+                }
             }
         }
     }   
