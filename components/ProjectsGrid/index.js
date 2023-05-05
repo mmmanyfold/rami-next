@@ -25,7 +25,6 @@ function Project({ title, slug, tags, year, thumbnail }) {
 }
 
 function ProjectsGrid({ projects }) {
-  console.log(projects);
   return (
     <div className="grid">
       {projects.map((project) => (

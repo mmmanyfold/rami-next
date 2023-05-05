@@ -1,4 +1,4 @@
-export default function Footnotes({ projects }) {
+function Footnotes({ projects }) {
   return (
     <section>
       {projects.map(({ id, title, slug }) => (
@@ -9,3 +9,5 @@ export default function Footnotes({ projects }) {
     </section>
   );
 }
+
+export default Footnotes;

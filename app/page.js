@@ -6,31 +6,16 @@ import ProjectsGrid from "../components/ProjectsGrid";
 import Footnotes from "../components/Footnotes";
 import { loadProjects } from "./api.js";
 
-export default function Home() {
+function Home() {
   const [projects, setProjects] = useState([]);
   const [innerWidth, setInnerWidth] = useState(0);
 
   useEffect(() => {
-    const fetchProjects = async () => {
-      const projectsData = await loadProjects(fetch);
+    const fetchData = async () => {
+      const projectsData = await loadProjects();
       setProjects(projectsData);
-      const urls = projectsData.reduce(
-        (acc, p) => {
-          const assets = p.homePageAssets;
-          const files = assets.files || [];
-          const fileUrls = files.map((f) => f.url);
-          if (assets.type === "Image") {
-            return { ...acc, images: [...acc.images, ...fileUrls] };
-          } else if (assets.type === "Video") {
-            return { ...acc, videos: [...acc.videos, ...fileUrls] };
-          } else {
-            return acc;
-          }
-        },
-        { images: [], videos: [] }
-      );
     };
-    fetchProjects();
+    fetchData();
   }, []);
 
   useEffect(() => {
@@ -97,3 +82,5 @@ export default function Home() {
     </>
   );
 }
+
+export default Home;

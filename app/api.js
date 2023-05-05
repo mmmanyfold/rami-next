@@ -1,6 +1,6 @@
 const baseUrl = "https://rami-notion-api.fly.dev/public/";
 
-export async function loadData(fetch, endpoint) {
+export async function loadData(endpoint) {
   try {
     const res = await fetch(baseUrl + endpoint);
     const json = await res.json();
@@ -10,8 +10,8 @@ export async function loadData(fetch, endpoint) {
   }
 }
 
-export async function loadProjects(fetch) {
-  const res = await loadData(fetch, "projects.json");
+export async function loadProjects() {
+  const res = await loadData("projects.json");
   const projects = res.data?.rows || [];
   const sorted = projects.sort((a, b) => (a.id < b.id ? 1 : -1));
   return sorted;

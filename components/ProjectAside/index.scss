@@ -1,0 +1,45 @@
+@import '../../variables.scss';
+
+aside {
+    margin: 1.25rem 0 6rem 0;
+
+    @media screen and (min-width: $mid-break) {
+        width: 20%;
+        margin-right: 3rem;
+        margin-top: 0.35rem;
+    }
+
+    sup {
+        display: block;
+        margin-bottom: 0.5rem;
+    }
+    
+    h1.title {
+        font-size: 1.45rem;
+        font-style: italic;
+        margin: 0;
+    }
+    
+    .meta {
+        margin-top: 1.45rem;
+    
+        .tags {
+            margin-top: 1rem;
+            text-transform: capitalize;
+        }
+    }
+    
+    .links {
+        color: $secondary-color;
+        a {
+            color: $secondary-color;
+            &:hover {
+                color: $accent-color;
+            }
+        }
+    }
+    
+    hr {
+        margin: 1.2rem 0;
+    }
+}

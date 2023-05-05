@@ -3,7 +3,7 @@ import "./index.scss";
 
 function MobileMenu({ isOpen, onToggle }) {
   return (
-    <>
+    <div className="mobile-menu">
       {isOpen && (
         <>
           <CSSTransition
@@ -33,7 +33,7 @@ function MobileMenu({ isOpen, onToggle }) {
           </CSSTransition>
         </>
       )}
-    </>
+    </div>
   );
 }
 

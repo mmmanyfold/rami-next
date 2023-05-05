@@ -4,7 +4,7 @@ import { useState } from "react";
 import Header from "../components/Header";
 import MobileMenu from "../components/MobileMenu";
 
-export default function RootLayout({ children }) {
+function RootLayout({ children }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const toggleMobileMenu = () => {
@@ -24,3 +24,5 @@ export default function RootLayout({ children }) {
     </html>
   );
 }
+
+export default RootLayout;
