@@ -100,7 +100,14 @@ const ParagraphObject = ({ object, color }) => {
   return (
     <>
       {textObjects && (
-        <p className={className} style={color ? { color: color } : null}>
+        <p
+          className={className}
+          style={
+            color
+              ? { color: color, padding: 0, margin: "1rem 0" }
+              : { padding: 0, margin: "1rem 0" }
+          }
+        >
           <RichTextCollection objects={textObjects} />
         </p>
       )}

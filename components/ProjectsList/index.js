@@ -1,10 +1,9 @@
 "use client";
 import { useState, useEffect } from "react";
 import ProjectsGrid from "../ProjectsGrid";
+import RowsIcon from "../../icon/RowsIcon";
+import GridIcon from "../../icon/GridIcon";
 import "./index.scss";
-
-// import RowsIcon from "./icon/RowsIcon";
-// import GridIcon from "./icon/GridIcon";
 
 function ProjectsList({ projects }) {
   const [activeView, setActiveView] = useState("list");
@@ -26,14 +25,14 @@ function ProjectsList({ projects }) {
           onClick={() => setActiveView("list")}
         >
           TEXT <span />
-          {/* <RowsIcon /> */}
+          <RowsIcon />
         </div>
         <div
           role="button"
           className={activeView === "gallery" ? "active" : ""}
           onClick={() => setActiveView("gallery")}
         >
-          {/* <GridIcon /> */}
+          <GridIcon />
           <span /> GALLERY
         </div>
       </div>

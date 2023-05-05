@@ -8,8 +8,8 @@ function CVItem({ title, description, detail, url, isNested }) {
         <a href={url} target="_blank">
           <span className="title">
             <RichTextCollection objects={title} />
-          </span>
-          {description && <RichTextCollection objects={description} />}
+          </span>{" "}
+          {description && <RichTextCollection objects={description} />}{" "}
           {detail && (
             <span className="detail">
               <RichTextCollection objects={detail} />
@@ -20,12 +20,12 @@ function CVItem({ title, description, detail, url, isNested }) {
         <>
           <span className="title">
             <RichTextCollection objects={title} />
-          </span>
+          </span>{" "}
           {description && (
             <span className="description">
               <RichTextCollection objects={description} />
             </span>
-          )}
+          )}{" "}
           {detail && <RichTextCollection objects={detail} />}
         </>
       )}
@@ -35,12 +35,12 @@ function CVItem({ title, description, detail, url, isNested }) {
 
 function CVSection({ name, items, isNested }) {
   return (
-    <section>
+    <section className="cv-section">
       {name && <h1 className={isNested ? "nested" : ""}>{name}</h1>}
       <ul className={isNested ? "nested" : ""}>
         {items.map((item) => (
           <CVItem
-            key={item.url || item.title}
+            key={item.title}
             title={item.title}
             description={item.description}
             detail={item.detail}

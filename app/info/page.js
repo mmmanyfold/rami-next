@@ -7,6 +7,7 @@ import SectionDrawer from "../../components/SectionDrawer";
 import { loadData } from "../api";
 import { processItemsByKey } from "../utils";
 import "./page.scss";
+import InfoSection from "@/components/InfoSection";
 
 const infoTags = ["Current & Forthcoming"];
 const cvTags = [
@@ -157,6 +158,7 @@ function InfoPage() {
                 isActive={activeSection === "Exhibitions & Screenings"}
                 onToggle={() => toggleSection("Exhibitions & Screenings")}
               />
+              <hr />
               {cvAdditional.tags.map((tag, i) => (
                 <Fragment key={tag}>
                   <SectionToggle
@@ -175,19 +177,28 @@ function InfoPage() {
       {/* column 2 */}
       <div className="column content">
         {activeSection === "Info" ? (
-          <section>
-            <h1>About</h1>
-            <p>
-              <RichTextCollection objects={bio} />
-            </p>
-            <hr />
-            <h1>Contact</h1>
-            <p>
-              <a href="mailto:ramimgeorge@gmail.com">
-                rami.m.george (at) gmail.com
-              </a>
-            </p>
-          </section>
+          <>
+            <section>
+              <h1>About</h1>
+              <p>
+                <RichTextCollection objects={bio} />
+              </p>
+              <hr />
+              <h1>Contact</h1>
+              <p>
+                <a href="mailto:ramimgeorge@gmail.com">
+                  rami.m.george (at) gmail.com
+                </a>
+              </p>
+            </section>
+            {info &&
+              info.tags.map((tag) => (
+                <>
+                  <hr />
+                  <InfoSection name={tag} items={info.itemsByKey[tag]} />
+                </>
+              ))}
+          </>
         ) : activeSection === "Exhibitions & Screenings" ? (
           <div>
             <h1>Exhibitions & Screenings</h1>
@@ -201,7 +212,7 @@ function InfoPage() {
             ))}
           </div>
         ) : activeSection === "Imprint" ? (
-          <div>
+          <div style={{ padding: 0 }}>
             <h1>Site Credits</h1>
             <RichTextCollection objects={imprint} />
           </div>

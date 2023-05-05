@@ -81,11 +81,7 @@ function ProjectPage() {
         </div>
       </div>
 
-      {projects && (
-        <div className="footnotes">
-          <Footnotes projects={projects} />
-        </div>
-      )}
+      {projects && <Footnotes projects={projects} />}
     </>
   );
 }

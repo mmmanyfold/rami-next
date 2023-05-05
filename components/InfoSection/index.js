@@ -1,4 +1,5 @@
 import { RichTextCollection } from "../notion";
+import "./index.scss";
 
 const ListItem = ({ item }) => {
   return (

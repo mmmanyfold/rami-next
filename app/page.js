@@ -26,7 +26,7 @@ function Home() {
   }, []);
 
   return (
-    <>
+    <div>
       <ul className="gallery">
         {innerWidth < 770 ? (
           <div style={{ padding: "0 1.25rem 0 1.25rem" }}>
@@ -79,7 +79,7 @@ function Home() {
         )}
       </ul>
       <Footnotes projects={projects} />
-    </>
+    </div>
   );
 }
 
