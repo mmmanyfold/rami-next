@@ -10,6 +10,17 @@ function ProjectsList({ projects }) {
   const [innerWidth, setInnerWidth] = useState(0);
 
   useEffect(() => {
+    const cachedView = JSON.parse(localStorage.getItem("activeView"));
+    if (cachedView) {
+      setActiveView(cachedView);
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("activeView", JSON.stringify(activeView));
+  }, [activeView]);
+
+  useEffect(() => {
     const handleResize = () => setInnerWidth(window.innerWidth);
     handleResize();
     window.addEventListener("resize", handleResize);
@@ -39,7 +50,7 @@ function ProjectsList({ projects }) {
 
       {activeView === "list" ? (
         <ul>
-          {projects?.length ? (
+          {!!projects?.length ? (
             projects.map(({ id, title, slug, year, tags }) => {
               const [first, ...rest] = title.split(",");
 
@@ -74,7 +85,7 @@ function ProjectsList({ projects }) {
               );
             })
           ) : (
-            <li>404</li>
+            <li></li>
           )}
         </ul>
       ) : activeView === "gallery" ? (
