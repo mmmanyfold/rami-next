@@ -39,8 +39,11 @@ function processExhibitionsScreenings(data) {
 
 function InfoPage() {
   const [data, setData] = useState(null);
-  const bioRef = useRef(null);
   const [activeSection, setActiveSection] = useState("Info");
+  const [innerHeight, setInnerHeight] = useState(0);
+  const [bioHeight, setBioHeight] = useState(0);
+
+  const bioRef = useRef(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -63,11 +66,22 @@ function InfoPage() {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    const handleResize = () => setInnerHeight(window.innerHeight);
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  useEffect(() => {
+    if (data && bioRef?.current) {
+      setBioHeight(bioRef.current.clientHeight);
+    }
+  }, [data, bioRef]);
+
   if (!data) {
     return null;
   }
-
-  console.log(bioRef);
 
   const toggleSection = (selected) => {
     if (activeSection === selected) {
@@ -106,7 +120,7 @@ function InfoPage() {
 
           <div
             className="accordion"
-            // style={{ paddingTop: `${bioHeight + 10}px` }}
+            style={{ paddingTop: `${bioHeight + 10}px` }}
           >
             <SectionDrawer
               name="Current & Forthcoming"

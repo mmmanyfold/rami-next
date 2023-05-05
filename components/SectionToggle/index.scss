@@ -23,7 +23,7 @@
 
     h1 {
         text-transform: uppercase;
-        margin: 0.3rem 0.4rem;
+        margin: 0.3rem 0.4rem !important;
         font-size: 0.95rem;
         
         @media (min-width: $mid-break) {
