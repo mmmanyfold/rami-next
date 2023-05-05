@@ -1,0 +1,110 @@
+@import '../../variables.scss';
+
+.projects-list {
+    padding: 1.35rem;
+    padding-top: 0;
+    
+    @media screen and (min-width: $mid-break) {
+        padding: 0;
+    }
+
+    .header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        color: $secondary-color;
+        padding-top: 1rem;
+        padding-bottom: 1.5rem;
+    
+        @media screen and (min-width: $mid-break) {
+            padding-bottom: 2.5rem;
+        }
+    
+        div {
+            display: flex;
+            align-items: center;
+            &.active {
+                color: #000;
+            }
+            span {
+                padding: 0 0.15rem;
+            }
+        }
+    }
+    
+    ul {
+        margin-top: 1.2rem;
+    
+        @media screen and (min-width: $mid-break) {
+            margin-top: 0;
+            margin-bottom: 2.5rem;
+        }
+    }
+    
+    li {
+        padding: 1rem 0;
+        border-bottom: 1px solid $accent-color;
+    
+        &:nth-child(1) {
+            padding-top: 0.5rem;
+        }
+    
+        @media screen and (min-width: $mid-break) {
+            display: flex;
+            justify-content: space-between;
+            padding: 1.1rem 0;
+    
+            &:nth-child(1) {
+                padding-top: 0;
+            }
+        }
+    
+        .title {
+            @media screen and (min-width: $mid-break) {
+                display: flex;
+                align-items: center;
+            }
+        }
+    
+        h1 {
+            margin: 0.3rem 0 0;
+            font-style: italic;
+            font-size: 1.45rem;
+    
+            @media screen and (min-width: $mid-break) {
+                margin-top: 0;
+                margin-left: 2.4rem;
+            }
+        }
+    
+        span {
+            white-space: pre;
+        }
+    
+        .title-text {
+            display: flex;
+            flex-wrap: wrap;
+        }
+    
+        .tags {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            text-transform: capitalize;
+    
+            @media screen and (min-width: $mid-break) {
+                flex-direction: row;
+                align-items: center;
+            }
+    
+            div {
+                margin-top: 0.4rem;
+                margin-left: 1rem;
+    
+                @media screen and (min-width: $mid-break) {
+                    margin-top: 0;
+                }
+            }
+        }
+    }
+}
