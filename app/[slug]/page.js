@@ -2,7 +2,6 @@
 import ProjectView from "../../components/ProjectView";
 import CaretLeft from "../../icon/CaretLeft";
 import CaretRight from "../../icon/CaretRight";
-import "./page.scss";
 import Footnotes from "../../components/Footnotes";
 import { loadProjects } from "../api";
 import { useRouter, usePathname } from "next/navigation";

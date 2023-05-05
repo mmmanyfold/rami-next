@@ -3,11 +3,15 @@ import { useState, useEffect } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import ProjectView from "../../../components/ProjectView";
 import { loadData, loadProjects } from "../../api";
+import CaretLeft from "@/icon/CaretLeft";
 
 function PressPage() {
   const [project, setProject] = useState(null);
   const [blocks, setBlocks] = useState(null);
   const pathname = usePathname();
+  const router = useRouter();
+
+  const projectSlug = pathname.split("/")[1];
 
   useEffect(() => {
     const fetchData = async () => {
@@ -19,9 +23,7 @@ function PressPage() {
       const cvAdditional = cvAdditionalRes?.data.rows || [];
       const pressItems = [...exhibitions, ...cvAdditional];
 
-      const currentProject = projects.find(
-        (p) => p?.slug === pathname.split("/")[1]
-      );
+      const currentProject = projects.find((p) => p?.slug === projectSlug);
       let blocks;
       if (currentProject) {
         const pressExhibitions = currentProject.pressExhibitions || [];
@@ -37,11 +39,20 @@ function PressPage() {
     fetchData();
   }, []);
 
+  if (!project) {
+    return null;
+  }
+
   return (
     <>
-      {project && (
-        <ProjectView project={project} blocks={blocks} view="Press" />
-      )}
+      <ProjectView project={project} blocks={blocks} view="Press" />
+      <div
+        className="desktop arrow left"
+        onClick={() => router.push("/" + projectSlug)}
+        role="button"
+      >
+        <CaretLeft />
+      </div>
     </>
   );
 }

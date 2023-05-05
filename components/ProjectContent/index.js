@@ -20,11 +20,14 @@ const Block = ({ block }) => {
     case "image":
       const caption = block.image.caption;
       return (
-        <img
-          src={block.image.file.url}
-          style={{ width: "100%" }}
-          alt={caption ? caption[0].plain_text : ""}
-        />
+        <>
+          <img
+            src={block.image.file.url}
+            style={{ width: "100%" }}
+            alt={caption ? caption[0].plain_text : ""}
+          />
+          {!!caption && <p className="caption">{caption[0].plain_text}</p>}
+        </>
       );
     case "video":
       const urlSegments = block.video.external.url.split("/");
