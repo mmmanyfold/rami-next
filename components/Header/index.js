@@ -7,7 +7,7 @@ function Header({ mobileMenuOpen, toggleMobileMenu }) {
         RAMI GEORGE
       </a>
       <div className="nav-links">
-        <a href="/index">INDEX</a>
+        <a href="/projects">INDEX</a>
         <a href="/info">INFO</a>
       </div>
       <div className="mobile-toggle-wrapper">

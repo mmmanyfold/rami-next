@@ -14,10 +14,10 @@ function Project({ title, slug, tags, year, thumbnail }) {
         <div className="tags">
           {tags.map((tag) => (
             <span key={tag}>
-              <a href={"/index/" + tag}>{tag}</a>,{" "}
+              <a href={"/projects/" + tag}>{tag}</a>,{" "}
             </span>
           ))}
-          <a href={"/index/" + year}>{year}</a>
+          <a href={"/projects/" + year}>{year}</a>
         </div>
       </div>
     </div>

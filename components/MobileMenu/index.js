@@ -23,7 +23,7 @@ function MobileMenu({ isOpen, onToggle }) {
             <div className="container" onClick={onToggle}>
               <ul>
                 <li>
-                  <a href="/index">INDEX</a>
+                  <a href="/projects">INDEX</a>
                 </li>
                 <li>
                   <a href="/info">INFO</a>

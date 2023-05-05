@@ -25,11 +25,11 @@ const ProjectAside = ({ project, view }) => {
                   {project.tags?.length &&
                     project.tags.map((tag) => (
                       <span key={tag}>
-                        <a href={"/index/" + tag}>{tag}</a>,{" "}
+                        <a href={"/projects/" + tag}>{tag}</a>,{" "}
                       </span>
                     ))}
                   {project.year && (
-                    <a href={"/index/" + project.year}>{project.year}</a>
+                    <a href={"/projects/" + project.year}>{project.year}</a>
                   )}
                 </div>
 
