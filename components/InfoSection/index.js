@@ -1,3 +1,4 @@
+import CaretUpRight from "@/icon/CaretUpRight";
 import { RichTextCollection } from "../notion";
 import "./index.scss";
 
@@ -21,10 +22,20 @@ const ListItem = ({ item }) => {
           {item["line-3"] && (
             <>
               <RichTextCollection objects={item["line-3"]} />
+              {!item["line-4"] && (
+                <>
+                  {" "}
+                  <CaretUpRight />
+                </>
+              )}
               <br />
             </>
           )}
-          {item["line-4"] && <RichTextCollection objects={item["line-4"]} />}
+          {item["line-4"] && (
+            <>
+              <RichTextCollection objects={item["line-4"]} /> <CaretUpRight />
+            </>
+          )}
         </a>
       ) : (
         <>

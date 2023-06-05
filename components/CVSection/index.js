@@ -1,4 +1,5 @@
 import { RichTextCollection } from "../notion";
+import CaretUpRight from "@/icon/CaretUpRight";
 import "./index.scss";
 
 function CVItem({ title, description, detail, url, isNested }) {
@@ -8,25 +9,38 @@ function CVItem({ title, description, detail, url, isNested }) {
         <a href={url} target="_blank">
           <span className="title">
             <RichTextCollection objects={title} />
-          </span>{" "}
-          {description && <RichTextCollection objects={description} />}{" "}
+          </span>
+          {description && (
+            <>
+              {" "}
+              <RichTextCollection objects={description} />
+            </>
+          )}
           {detail && (
             <span className="detail">
+              {" "}
               <RichTextCollection objects={detail} />
             </span>
-          )}
+          )}{" "}
+          <CaretUpRight />
         </a>
       ) : (
         <>
           <span className="title">
             <RichTextCollection objects={title} />
-          </span>{" "}
+          </span>
           {description && (
             <span className="description">
+              {" "}
               <RichTextCollection objects={description} />
             </span>
-          )}{" "}
-          {detail && <RichTextCollection objects={detail} />}
+          )}
+          {detail && (
+            <>
+              {" "}
+              <RichTextCollection objects={detail} />
+            </>
+          )}
         </>
       )}
     </li>
