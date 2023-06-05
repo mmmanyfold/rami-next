@@ -7,7 +7,7 @@
 .zoom-overlay {
     background-color: var(--bg-color);
     position: fixed;
-    top: 56.4px;
+    top: 0;
     left: 0;
     right: 0;
     bottom: 0;
@@ -18,13 +18,12 @@
 }
 
 .zoom-content {
-    position: fixed;
-    top: 0;
     width: 100vw;
-    margin-top: 56.4px;
+    position: fixed;
+    top: 56.4px;
 
     @media screen and (min-width: $mid-break) {
-        margin-top: 80px;
+        top: 80px;
     }
 
     &:focus {
@@ -33,17 +32,12 @@
 
     .close-container {
         display: flex;
-        justify-content: end;
+        justify-content: flex-end;
         padding-right: 1.8rem;
-        // padding-top: 1rem;
         padding-bottom: 1rem;
 
         svg {
             cursor: pointer;
         }
-    }
-
-    img {
-        width: 100%;
     }
 }

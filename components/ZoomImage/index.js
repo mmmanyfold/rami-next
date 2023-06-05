@@ -1,6 +1,8 @@
 "use client";
 import React from "react";
 import * as Dialog from "@radix-ui/react-dialog";
+import "react-inner-image-zoom/lib/InnerImageZoom/styles.css";
+import InnerImageZoom from "react-inner-image-zoom";
 import X from "../../icon/X";
 import "./index.scss";
 
@@ -22,7 +24,12 @@ const ZoomImage = ({ src, alt, fullWidth }) => (
             <X />
           </div>
         </Dialog.Close>
-        <img src={src} alt={alt} />
+        <InnerImageZoom
+          src={src}
+          zoomSrc={src}
+          hideCloseButton={true}
+          hideHint={true}
+        />
       </Dialog.Content>
     </Dialog.Portal>
   </Dialog.Root>
