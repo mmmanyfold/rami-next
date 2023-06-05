@@ -16,7 +16,7 @@ const Block = ({ block }) => {
       return (
         <p>
           {block.paragraph.rich_text.map((richText) => (
-            <RichTextObject object={richText} />
+            <RichTextObject key={richText.text.content} object={richText} />
           ))}
         </p>
       );
