@@ -94,9 +94,71 @@ function InfoPage() {
   const { info, exhibitionsScreenings, cvAdditional, imprint } = data;
   const bio = info.itemsByKey.Bio[0]["line-1"];
 
+  let content;
+  switch (activeSection) {
+    case "Info":
+      content = (
+        <>
+          <section>
+            <h1>About</h1>
+            <p>
+              <RichTextCollection objects={bio} />
+            </p>
+            <hr />
+            <h1>Contact</h1>
+            <p>
+              <a href="mailto:ramimgeorge@gmail.com">
+                rami.m.george (at) gmail.com
+              </a>
+            </p>
+          </section>
+          {info &&
+            info.tags.map((tag) => (
+              <Fragment key={tag}>
+                <hr />
+                <InfoSection name={tag} items={info.itemsByKey[tag]} />
+              </Fragment>
+            ))}
+        </>
+      );
+      break;
+    case "Exhibitions & Screenings":
+      content = (
+        <div>
+          <h1>Exhibitions & Screenings</h1>
+          {exhibitionsScreenings.years.map((year) => (
+            <CVSection
+              key={year}
+              name={year}
+              items={exhibitionsScreenings.itemsByKey[year]}
+              isNested={true}
+            />
+          ))}
+        </div>
+      );
+      break;
+    case "Imprint":
+      content = (
+        <div>
+          <h1>Site Credits</h1>
+          <div className="imprint">
+            <RichTextCollection objects={imprint} />
+          </div>
+        </div>
+      );
+      break;
+    default:
+      content = (
+        <CVSection
+          name={activeSection}
+          items={cvAdditional.itemsByKey[activeSection]}
+        />
+      );
+  }
+
   return (
     <div className="info">
-      {/* column 1 */}
+      {/* column left */}
       <div className="column">
         {/* mobile */}
         <div
@@ -188,57 +250,8 @@ function InfoPage() {
         </div>
       </div>
 
-      {/* column 2 */}
-      <div className="column content">
-        {activeSection === "Info" ? (
-          <>
-            <section>
-              <h1>About</h1>
-              <p>
-                <RichTextCollection objects={bio} />
-              </p>
-              <hr />
-              <h1>Contact</h1>
-              <p>
-                <a href="mailto:ramimgeorge@gmail.com">
-                  rami.m.george (at) gmail.com
-                </a>
-              </p>
-            </section>
-            {info &&
-              info.tags.map((tag) => (
-                <>
-                  <hr />
-                  <InfoSection name={tag} items={info.itemsByKey[tag]} />
-                </>
-              ))}
-          </>
-        ) : activeSection === "Exhibitions & Screenings" ? (
-          <div>
-            <h1>Exhibitions & Screenings</h1>
-            {exhibitionsScreenings.years.map((year) => (
-              <CVSection
-                key={year}
-                name={year}
-                items={exhibitionsScreenings.itemsByKey[year]}
-                isNested={true}
-              />
-            ))}
-          </div>
-        ) : activeSection === "Imprint" ? (
-          <div>
-            <h1>Site Credits</h1>
-            <div className="imprint">
-              <RichTextCollection objects={imprint} />
-            </div>
-          </div>
-        ) : (
-          <CVSection
-            name={activeSection}
-            items={cvAdditional.itemsByKey[activeSection]}
-          />
-        )}
-      </div>
+      {/* column right */}
+      <div className="column content">{content}</div>
     </div>
   );
 }

@@ -54,7 +54,7 @@ function CVSection({ name, items, isNested }) {
       <ul className={isNested ? "nested" : ""}>
         {items.map((item) => (
           <CVItem
-            key={item.title}
+            key={item.uuid}
             title={item.title}
             description={item.description}
             detail={item.detail}
