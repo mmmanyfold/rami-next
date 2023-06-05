@@ -1,4 +1,5 @@
 import { RichTextCollection, RichTextObject } from "../notion";
+import ZoomImage from "../ZoomImage";
 import "./index.scss";
 
 const Block = ({ block }) => {
@@ -23,10 +24,10 @@ const Block = ({ block }) => {
       const caption = block.image.caption;
       return (
         <>
-          <img
+          <ZoomImage
             src={block.image.file.url}
-            style={{ width: "100%" }}
             alt={caption ? caption[0].plain_text : ""}
+            fullWidth={true}
           />
           {!!caption && <p className="caption">{caption[0].plain_text}</p>}
         </>

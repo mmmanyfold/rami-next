@@ -1,0 +1,49 @@
+@import '../../variables.scss';
+
+.zoom-trigger {
+    cursor: pointer;
+}
+
+.zoom-overlay {
+    background-color: var(--bg-color);
+    position: fixed;
+    top: 56.4px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    @media screen and (min-width: $mid-break) {
+        top: 80px;
+    }
+}
+
+.zoom-content {
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    margin-top: 56.4px;
+
+    @media screen and (min-width: $mid-break) {
+        margin-top: 80px;
+    }
+
+    &:focus {
+        outline: none;
+    }
+
+    .close-container {
+        display: flex;
+        justify-content: end;
+        padding-right: 1.8rem;
+        // padding-top: 1rem;
+        padding-bottom: 1rem;
+
+        svg {
+            cursor: pointer;
+        }
+    }
+
+    img {
+        width: 100%;
+    }
+}
