@@ -1,12 +1,35 @@
 import React from "react";
 import "./index.scss";
 
-function Project({ title, slug, tags, year, thumbnail }) {
+function Project({ title, slug, tags, year, homePageAssets }) {
+  const { type: assetType, files } = homePageAssets;
   return (
     <div className="item">
-      <a href={"/" + slug} className="title">
-        <img src={thumbnail} alt={title} />
-      </a>
+      <div class="asset">
+        <a href={"/" + slug}>
+          {assetType === "Video" ? (
+            <div className="video-container">
+              <div className="loading">loading...</div>
+              <video autoPlay muted loop>
+                <source src={files[0].url} type="video/mp4" />
+              </video>
+            </div>
+          ) : assetType === "Image" && files.length > 1 ? (
+            <>
+              <img
+                className="hover-image"
+                src={files[1].url}
+                alt=""
+                loading="lazy"
+              />
+              <img src={files[0].url} alt={title} loading="lazy" />
+            </>
+          ) : assetType === "Image" && files.length === 1 ? (
+            <img src={files[0].url} alt={title} loading="lazy" />
+          ) : null}
+        </a>
+      </div>
+
       <div className="caption">
         <a href={"/" + slug} className="title">
           {title}

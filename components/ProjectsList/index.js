@@ -6,7 +6,7 @@ import GridIcon from "../../icon/GridIcon";
 import "./index.scss";
 
 function ProjectsList({ projects }) {
-  const [activeView, setActiveView] = useState("list");
+  const [activeView, setActiveView] = useState("gallery");
   const [innerWidth, setInnerWidth] = useState(0);
 
   useEffect(() => {

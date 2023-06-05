@@ -3,11 +3,9 @@ import "./index.scss";
 function Header({ mobileMenuOpen, toggleMobileMenu }) {
   return (
     <header>
-      <a className="home-link" href="/">
-        RAMI GEORGE
-      </a>
+      <div className="title">RAMI GEORGE</div>
       <div className="nav-links">
-        <a href="/projects">INDEX</a>
+        <a href="/">INDEX</a>
         <a href="/info">INFO</a>
       </div>
       <div className="mobile-toggle-wrapper">

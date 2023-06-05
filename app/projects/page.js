@@ -14,11 +14,7 @@ function IndexPage() {
     fetchData();
   }, []);
 
-  return (
-    <div>
-      <ProjectsList projects={projects} />
-    </div>
-  );
+  return <ProjectsList projects={projects} />;
 }
 
 export default IndexPage;
