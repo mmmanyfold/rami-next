@@ -2,11 +2,11 @@ import { RichTextCollection } from "../notion";
 import CaretUpRight from "@/icon/CaretUpRight";
 import "./index.scss";
 
-function CVItem({ title, description, detail, url, isNested }) {
+function CVItem({ title, description, detail, url, download, isNested }) {
   return (
     <li className={`cv-section ${isNested ? "nested" : ""}`}>
-      {url ? (
-        <a href={url} target="_blank">
+      {url || download ? (
+        <a href={url || download[0].url} target="_blank">
           <span className="title">
             <RichTextCollection objects={title} />
           </span>
@@ -59,6 +59,7 @@ function CVSection({ name, items, isNested }) {
             description={item.description}
             detail={item.detail}
             url={item.url}
+            download={item.download}
             isNested={isNested}
           />
         ))}
