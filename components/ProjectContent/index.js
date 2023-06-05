@@ -14,7 +14,9 @@ const Block = ({ block }) => {
     case "paragraph":
       return (
         <p>
-          <RichTextObject object={block.paragraph.rich_text[0]} />
+          {block.paragraph.rich_text.map((richText) => (
+            <RichTextObject object={richText} />
+          ))}
         </p>
       );
     case "image":
