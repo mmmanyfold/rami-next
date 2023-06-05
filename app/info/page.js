@@ -1,13 +1,13 @@
 "use client";
 import { Fragment, useState, useEffect, useRef } from "react";
-import { RichTextCollection } from "../../components/notion";
-import CVSection from "../../components/CVSection";
-import SectionToggle from "../../components/SectionToggle";
-import SectionDrawer from "../../components/SectionDrawer";
+import { RichTextCollection } from "@/components/notion";
+import CVSection from "@/components/CVSection";
+import InfoSection from "@/components/InfoSection";
+import SectionToggle from "@/components/SectionToggle";
+import SectionDrawer from "@/components/SectionDrawer";
 import { loadData } from "../api";
 import { processItemsByKey } from "../utils";
 import "./page.scss";
-import InfoSection from "@/components/InfoSection";
 
 const infoTags = ["Current & Forthcoming"];
 const cvTags = [
@@ -226,9 +226,11 @@ function InfoPage() {
             ))}
           </div>
         ) : activeSection === "Imprint" ? (
-          <div style={{ padding: 0 }}>
+          <div>
             <h1>Site Credits</h1>
-            <RichTextCollection objects={imprint} />
+            <div className="imprint">
+              <RichTextCollection objects={imprint} />
+            </div>
           </div>
         ) : (
           <CVSection

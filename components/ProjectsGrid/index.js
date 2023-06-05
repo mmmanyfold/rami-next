@@ -5,7 +5,7 @@ function Project({ title, slug, tags, year, homePageAssets }) {
   const { type: assetType, files } = homePageAssets;
   return (
     <div className="item">
-      <div class="asset">
+      <div className="asset">
         <a href={"/" + slug}>
           {assetType === "Video" ? (
             <div className="video-container">
