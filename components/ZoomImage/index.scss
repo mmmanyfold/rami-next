@@ -21,6 +21,7 @@
     width: 100vw;
     position: fixed;
     top: 56.4px;
+    background-color: var(--bg-color);
 
     @media screen and (min-width: $mid-break) {
         top: 80px;
@@ -33,8 +34,13 @@
     .close-container {
         display: flex;
         justify-content: flex-end;
-        padding-right: 1.8rem;
-        padding-bottom: 1rem;
+        align-items: center;
+        height: 38px;
+        padding-right: 0.75rem;
+
+        @media screen and (min-width: $mid-break) {
+            padding-right: 1.8rem;
+        }
 
         svg {
             cursor: pointer;
