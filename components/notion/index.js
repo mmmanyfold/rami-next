@@ -1,7 +1,8 @@
 import React from "react";
+import CaretUpRight from "@/icon/CaretUpRight";
 import "./index.scss";
 
-function RichTextObject({ object, color }) {
+function RichTextObject({ object, color, linkArrow }) {
   let textObject;
   let content;
   let linkUrl;
@@ -31,6 +32,7 @@ function RichTextObject({ object, color }) {
               <pre className={className} style={color ? { color } : {}}>
                 {content}
               </pre>
+              {linkArrow && <CaretUpRight />}
             </a>
           ) : (
             <pre className={className} style={color ? { color } : {}}>
@@ -44,7 +46,8 @@ function RichTextObject({ object, color }) {
             <a href={linkUrl}>
               <span className={className} style={color ? { color } : {}}>
                 {content}
-              </span>
+              </span>{" "}
+              {linkArrow && <CaretUpRight />}
             </a>
           ) : (
             <span className={className} style={color ? { color } : {}}>
@@ -57,12 +60,25 @@ function RichTextObject({ object, color }) {
   );
 }
 
-const RichTextCollectionItem = ({ object, color }) => {
+const RichTextCollectionItem = ({ object, color, linkArrow }) => {
   switch (object.type) {
     case "text":
-      return <RichTextObject key={object.id} object={object} color={color} />;
+      return (
+        <RichTextObject
+          key={object.id}
+          object={object}
+          color={color}
+          linkArrow={linkArrow}
+        />
+      );
     case "paragraph":
-      return <ParagraphObject key={object.id} object={object} />;
+      return (
+        <ParagraphObject
+          key={object.id}
+          object={object}
+          linkArrow={linkArrow}
+        />
+      );
     case "divider":
       return <hr key={object.id} />;
     default:
@@ -70,7 +86,7 @@ const RichTextCollectionItem = ({ object, color }) => {
   }
 };
 
-function RichTextCollection({ objects, color }) {
+function RichTextCollection({ objects, color, linkArrow }) {
   return (
     <>
       {objects?.map((object, i) => (
@@ -78,13 +94,14 @@ function RichTextCollection({ objects, color }) {
           key={`${object.type}-${i}`}
           object={object}
           color={color}
+          linkArrow={linkArrow}
         />
       ))}
     </>
   );
 }
 
-const ParagraphObject = ({ object, color }) => {
+const ParagraphObject = ({ object, color, linkArrow }) => {
   let textObjects;
   let className = "";
 
@@ -108,7 +125,7 @@ const ParagraphObject = ({ object, color }) => {
               : { padding: 0, margin: "1rem 0" }
           }
         >
-          <RichTextCollection objects={textObjects} />
+          <RichTextCollection objects={textObjects} linkArrow={linkArrow} />
         </p>
       )}
     </>

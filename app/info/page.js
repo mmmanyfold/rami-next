@@ -142,7 +142,7 @@ function InfoPage() {
         <div>
           <h1>Site Credits</h1>
           <div className="imprint">
-            <RichTextCollection objects={imprint} />
+            <RichTextCollection objects={imprint} linkArrow={true} />
           </div>
         </div>
       );
