@@ -45,6 +45,8 @@ const ProjectAside = ({ project, view }) => {
           {project.description?.length &&
             (project.transcript?.uuid ||
               project.exhibitionGuide ||
+              project.exhibitionPublication ||
+              project.miscellaneous ||
               hasPress) && <hr />}
 
           <div className="links">
@@ -64,6 +66,22 @@ const ProjectAside = ({ project, view }) => {
                     <a href={project.exhibitionGuide} target="_blank">
                       Exhibition Guide
                     </a>
+                    <br />
+                    <br />
+                  </>
+                )}
+                {project.exhibitionPublication && (
+                  <>
+                    <a href={project.exhibitionPublication} target="_blank">
+                      Exhibition Publication
+                    </a>
+                    <br />
+                    <br />
+                  </>
+                )}
+                {project.miscellaneous && (
+                  <>
+                    <RichTextCollection objects={project.miscellaneous} />
                     <br />
                     <br />
                   </>
