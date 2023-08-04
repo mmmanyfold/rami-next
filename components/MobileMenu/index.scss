@@ -1,4 +1,7 @@
 .mobile-menu {
+    position: relative;
+    z-index: 100;
+
     .overlay {
         position: fixed;
         height: 100vh;
