@@ -69,14 +69,14 @@ function ProjectPage() {
           onClick={() => router.push(prev.slug)}
           role="button"
         >
-          <CaretLeft />
+          <CaretLeft size={30} />
         </div>
         <div
           className="arrow right"
           onClick={() => router.push(next.slug)}
           role="button"
         >
-          <CaretRight />
+          <CaretRight size={30} />
         </div>
       </div>
 
