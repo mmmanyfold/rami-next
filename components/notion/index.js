@@ -79,6 +79,13 @@ const RichTextCollectionItem = ({ object, color, linkArrow }) => {
           linkArrow={linkArrow}
         />
       );
+    case "bulleted_list_item":
+      return (
+        <BulletedListItem
+          key={object.id}
+          block={object}
+        />
+      );
     case "divider":
       return <hr key={object.id} />;
     default:
@@ -131,5 +138,15 @@ const ParagraphObject = ({ object, color, linkArrow }) => {
     </>
   );
 };
+
+const BulletedListItem = ({ block }) => {
+  return (
+    <li class="notion-bulleted-list-item">
+      <div>
+        <RichTextCollection objects={block.bulleted_list_item?.rich_text} />
+      </div>
+    </li>
+  )
+}
 
 export { RichTextObject, RichTextCollection, ParagraphObject };

@@ -1,5 +1,4 @@
 "use client";
-import { useState } from "react";
 import CaretRight from "../../icon/CaretRight";
 import CaretDown from "../../icon/CaretDown";
 import "./index.scss";

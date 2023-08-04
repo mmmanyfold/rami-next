@@ -52,7 +52,7 @@ function CVSection({ name, items, isNested }) {
     <section className="cv-section">
       {name && <h1 className={isNested ? "nested" : ""}>{name}</h1>}
       <ul className={isNested ? "nested" : ""}>
-        {items.map((item) => (
+        {items?.map((item) => (
           <CVItem
             key={item.uuid}
             title={item.title}

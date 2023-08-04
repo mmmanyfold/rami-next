@@ -4,7 +4,7 @@ import SectionToggle from "../SectionToggle";
 import InfoSection from "../InfoSection";
 import CVSection from "../CVSection";
 
-function SectionDrawer({ name, type, items, isNested = false }) {
+function SectionDrawer({ name, type, items, isNested = false, children }) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -23,7 +23,7 @@ function SectionDrawer({ name, type, items, isNested = false }) {
             <CVSection items={items} isNested={isNested} />
           ) : type === "info" ? (
             <InfoSection items={items} />
-          ) : null}
+          ) : children}
         </div>
       )}
     </section>

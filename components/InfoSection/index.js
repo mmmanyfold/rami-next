@@ -69,7 +69,7 @@ const InfoSection = ({ name, items }) => {
     <section className="info-section">
       {name && <h1>{name}</h1>}
       <ul>
-        {items.map((item, index) => (
+        {items?.map((item, index) => (
           <ListItem key={index} item={item} />
         ))}
       </ul>

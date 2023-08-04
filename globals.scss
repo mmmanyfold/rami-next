@@ -99,6 +99,18 @@ ul {
 	margin: 0;
 }
 
+li.notion-bulleted-list-item {
+	list-style-type: none;
+	display: flex;
+	margin-bottom: 1rem;
+	line-height: 1.5;
+
+	&::before {
+		content: "•";
+		margin-right: 6.5px;
+	}
+}
+
 .inline-block {
 	display: inline-block;
 }

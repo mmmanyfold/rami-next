@@ -16,8 +16,7 @@ const cvTags = [
   "Press",
   "Programming",
   "Teaching & Talks",
-  "Education",
-  "Imprint",
+  "Education"
 ];
 
 function processInfo(data) {
@@ -219,9 +218,15 @@ function InfoPage() {
                   type="cv"
                   items={cvAdditional.itemsByKey[tag]}
                 />
-                {i < cvAdditional.tags.length - 1 && <hr />}
+                <hr />
               </Fragment>
             ))}
+
+            <SectionDrawer name="Imprint">
+              <div className="imprint">
+                <RichTextCollection objects={imprint} linkArrow={true} />
+              </div>
+            </SectionDrawer>
           </div>
         </div>
 
@@ -235,16 +240,21 @@ function InfoPage() {
                 onToggle={() => toggleSection("Exhibitions & Screenings")}
               />
               <hr />
-              {cvAdditional.tags.map((tag, i) => (
+              {cvAdditional.tags.map((tag) => (
                 <Fragment key={tag}>
                   <SectionToggle
                     label={tag}
                     isActive={activeSection === tag}
                     onToggle={() => toggleSection(tag)}
                   />
-                  {i < cvAdditional.tags.length - 1 && <hr />}
+                  <hr />
                 </Fragment>
               ))}
+              <SectionToggle
+                label="Imprint"
+                isActive={activeSection === "Imprint"}
+                onToggle={() => toggleSection("Imprint")}
+              />
             </>
           )}
         </div>
