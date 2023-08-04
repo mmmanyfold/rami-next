@@ -16,10 +16,7 @@ function Home() {
   }, []);
 
   return (
-    <>
-      <ProjectsList projects={projects} />
-      <Footnotes projects={projects} />
-    </>
+    <ProjectsList projects={projects} />
   );
 }
 

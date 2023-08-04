@@ -35,9 +35,9 @@ const ProjectAside = ({ project, view }) => {
 
                 <hr />
 
-                <small>
+                <div class="description">
                   <RichTextCollection objects={project.description} />
-                </small>
+                </div>
               </div>
             </>
           )}

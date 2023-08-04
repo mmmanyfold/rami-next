@@ -47,9 +47,7 @@ const Block = ({ block }) => {
             />
           </div>
           {block.video.caption && (
-            <p className="video-caption">
-              <RichTextCollection objects={block.video.caption} />
-            </p>
+            <p className="caption">{block.video.caption[0].plain_text}</p>
           )}
         </>
       );

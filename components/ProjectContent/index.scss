@@ -5,6 +5,7 @@
     overflow: hidden;
     width: 100%;
     padding-top: 56.25%; /* 16:9 Aspect Ratio (divide 9 by 16 = 0.5625) */
+    margin-bottom: 0.7rem;
     iframe {
         position: absolute;
         top: 0;
@@ -24,7 +25,5 @@
 
 .caption {
     color: $secondary-color;
-    margin-top: 0.2rem;
-    font-size: 1rem;
-    line-height: 1.2rem;
+    margin-top: 0.3rem;
 }

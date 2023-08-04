@@ -1,28 +1,13 @@
 @import 'variables';
-
-@font-face {
-	font-family: 'Haas Grot Text Web';
-	src: url('/font/NeueHaasGrotText-56Italic-Web.woff2') format('woff2'),
-		 url('/font/NeueHaasGrotText-56Italic-Web.woff') format('woff');
-	font-weight:  400;
-	font-style:   italic;
-	font-stretch: normal;
-} 
-
-@font-face {
-	font-family: 'Haas Grot Text Web';
-	src: url('/font/NeueHaasGrotText-55Roman-Web.woff2') format('woff2'),
-		 url('/font/NeueHaasGrotText-55Roman-Web.woff') format('woff');
-	font-weight:  400;
-	font-style:   normal;
-	font-stretch: normal;
-}
+@import url('https://fonts.cdnfonts.com/css/neue-haas-grotesk-display-pro');
 
 :root {
-	font-family: 'Haas Grot Text Web';
+	font-family: 'Neue Haas Grotesk Display Pro';
+	letter-spacing: 0.04em;
+	font-weight: 500;
 	--text-color: #343a40;
 	--bg-color: #fdfcfa;
-	--base-font-size: 1.08rem;
+	--base-font-size: 1.03rem;
 }
 
 * {
@@ -44,7 +29,7 @@ body {
 
 pre {
 	margin: 0;
-	font-family: 'Haas Grot Text Web';
+	font-family: 'Neue Haas Grotesk Display Pro';
 	white-space: pre-line;       
     white-space: -moz-pre-line;  
     white-space: -pre-line;      
@@ -52,14 +37,9 @@ pre {
     word-wrap: break-word;
 }
 
-h1,
-h2,
-p {
-	font-weight: 400;
-	font-size: var(--base-font-size);
-}
-
 h1 {
+	font-weight: 500;
+	font-size: var(--base-font-size);
 	margin: 1.75rem 0;
 }
 
@@ -103,11 +83,6 @@ hr {
 	height: 1px;
 	border: 0;
 	margin: 1.8rem 0;
-}
-
-small {
-	font-size: 1rem;
-	color: $secondary-color;
 }
 
 sup {
@@ -196,4 +171,8 @@ main {
     align-items: center;
     justify-content: space-between;
     background-color: var(--bg-color);
+}
+
+.description {
+    color: $secondary-color;
 }
