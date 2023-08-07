@@ -35,6 +35,7 @@ const ZoomImage = ({ src, alt, fullWidth }) => {
           src={src}
           style={fullWidth ? { width: "100%" } : null}
           alt={alt}
+          loading="lazy"
         />
       </Dialog.Trigger>
       <Dialog.Portal>
@@ -55,7 +56,7 @@ const ZoomImage = ({ src, alt, fullWidth }) => {
                     margin: "auto",
                   }}
                 >
-                  <img src={src} alt={alt} />
+                  <img src={src} alt={alt} loading="lazy" />
                 </TransformComponent>
               </TransformWrapper>
             </div>
@@ -71,6 +72,7 @@ const ZoomImage = ({ src, alt, fullWidth }) => {
               <img
                 src={src}
                 alt={alt}
+                loading="lazy"
                 style={{
                   height: "100%",
                   maxWidth: "100%",

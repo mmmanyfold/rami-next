@@ -50,6 +50,7 @@ const VideoDialog = ({ block }) => {
             >
               <video
                 controls
+                playsinline
                 style={{
                   height: "100%",
                   maxWidth: "100%",

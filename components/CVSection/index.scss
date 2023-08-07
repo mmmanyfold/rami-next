@@ -18,10 +18,6 @@
     
         &.nested {
             padding-bottom: 0;
-    
-            @media screen and (min-width: $mid-break) {
-                padding-top: 1rem;
-            }
         }
     }
     
