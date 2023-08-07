@@ -29,7 +29,7 @@ const VideoDialog = ({ block }) => {
         }}
       >
         <Dialog.Trigger asChild>
-          <video style={{ width: "100%", cursor: "pointer" }}>
+          <video playsInline style={{ width: "100%", cursor: "pointer" }}>
             <source src={file.url} type="video/mp4" />
           </video>
         </Dialog.Trigger>
@@ -50,7 +50,7 @@ const VideoDialog = ({ block }) => {
             >
               <video
                 controls
-                playsinline
+                playsInline
                 style={{
                   height: "100%",
                   maxWidth: "100%",

@@ -44,7 +44,7 @@ h1 {
 }
 
 p {
-	line-height: 1.5;
+	line-height: 1.4;
 }
 
 a {
@@ -103,7 +103,7 @@ li.notion-bulleted-list-item {
 	list-style-type: none;
 	display: flex;
 	margin-bottom: 1rem;
-	line-height: 1.5;
+	line-height: 1.4;
 
 	&::before {
 		content: "•";
@@ -190,4 +190,8 @@ main {
 
 .description {
     color: $secondary-color;
+}
+
+iframe {
+	border: 0;
 }

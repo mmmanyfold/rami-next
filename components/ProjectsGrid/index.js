@@ -10,7 +10,7 @@ function Project({ title, slug, tags, year, homePageAssets }) {
           {assetType === "Video" ? (
             <div className="video-container">
               <div className="loading">loading...</div>
-              <video autoplay muted loop playsinline>
+              <video autoPlay muted loop playsInline>
                 <source src={files[0].url} type="video/mp4" />
               </video>
             </div>
