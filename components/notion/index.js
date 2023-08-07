@@ -141,12 +141,12 @@ const ParagraphObject = ({ object, color, linkArrow }) => {
 
 const BulletedListItem = ({ block }) => {
   return (
-    <li class="notion-bulleted-list-item">
+    <li className="notion-bulleted-list-item">
       <div>
         <RichTextCollection objects={block.bulleted_list_item?.rich_text} />
       </div>
     </li>
-  )
-}
+  );
+};
 
 export { RichTextObject, RichTextCollection, ParagraphObject };

@@ -46,7 +46,7 @@ const ZoomImage = ({ src, alt, fullWidth }) => {
             </div>
           </Dialog.Close>
           {zoomMode ? (
-            <div class="zoom-image-container">
+            <div className="zoom-image-container">
               <TransformWrapper>
                 <TransformComponent
                   wrapperStyle={{
