@@ -7,6 +7,8 @@ import "./index.scss";
 
 const ZoomImage = ({ src, alt, fullWidth }) => {
   const [contentHeight, setContentHeight] = useState(window.innerHeight - 118);
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [zoomMode, setZoomMode] = useState(false);
 
   useEffect(() => {
     function handleResize() {
@@ -20,7 +22,13 @@ const ZoomImage = ({ src, alt, fullWidth }) => {
   }, []);
 
   return (
-    <Dialog.Root>
+    <Dialog.Root
+      open={dialogOpen}
+      onOpenChange={(open) => {
+        setDialogOpen(open);
+        setZoomMode(false);
+      }}
+    >
       <Dialog.Trigger asChild>
         <img
           className="zoom-trigger"
@@ -37,19 +45,30 @@ const ZoomImage = ({ src, alt, fullWidth }) => {
               <X />
             </div>
           </Dialog.Close>
-          <div class="zoom-image-container">
-            <TransformWrapper>
-              <TransformComponent
-                wrapperStyle={{
-                  maxHeight: `${contentHeight}px`,
-                  maxWidth: "100%",
-                  margin: "auto",
-                }}
-              >
-                <img src={src} alt={alt} />
-              </TransformComponent>
-            </TransformWrapper>
-          </div>
+          {zoomMode ? (
+            <div class="zoom-image-container">
+              <TransformWrapper>
+                <TransformComponent
+                  wrapperStyle={{
+                    maxHeight: `${contentHeight}px`,
+                    maxWidth: "100%",
+                    margin: "auto",
+                  }}
+                >
+                  <img src={src} alt={alt} />
+                </TransformComponent>
+              </TransformWrapper>
+            </div>
+          ) : (
+            <div
+              className="zoom-thumbnail"
+              style={{ height: `${contentHeight}px` }}
+              onClick={() => setZoomMode(true)}
+              role="button"
+            >
+              <img src={src} alt={alt} style={{ height: "100%" }} />
+            </div>
+          )}
         </Dialog.Content>
       </Dialog.Portal>
     </Dialog.Root>

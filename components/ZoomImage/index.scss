@@ -47,6 +47,12 @@
         }
     }
 
+    .zoom-thumbnail {
+        display: flex;
+        justify-content: center;
+        cursor: zoom-in;
+    }
+
     .zoom-image-container {
         cursor: grab;
     }
