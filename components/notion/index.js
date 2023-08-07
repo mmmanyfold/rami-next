@@ -80,12 +80,7 @@ const RichTextCollectionItem = ({ object, color, linkArrow }) => {
         />
       );
     case "bulleted_list_item":
-      return (
-        <BulletedListItem
-          key={object.id}
-          block={object}
-        />
-      );
+      return <BulletedListItem key={object.id} block={object} />;
     case "divider":
       return <hr key={object.id} />;
     default:

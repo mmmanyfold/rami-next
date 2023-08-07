@@ -62,11 +62,21 @@ const ZoomImage = ({ src, alt, fullWidth }) => {
           ) : (
             <div
               className="zoom-thumbnail"
-              style={{ height: `${contentHeight}px` }}
+              style={{
+                height: `${contentHeight}px`,
+              }}
               onClick={() => setZoomMode(true)}
               role="button"
             >
-              <img src={src} alt={alt} style={{ height: "100%" }} />
+              <img
+                src={src}
+                alt={alt}
+                style={{
+                  height: "100%",
+                  maxWidth: "100%",
+                  objectFit: "contain",
+                }}
+              />
             </div>
           )}
         </Dialog.Content>
