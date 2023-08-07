@@ -163,13 +163,13 @@ main {
         }
     }
     &.left {
-        padding-left: 2rem;
+        padding-left: 1rem;
         @media (min-width: $mid-break) {
             left: 0;
         }
     }
     &.right {
-        padding-right: 2rem;
+        padding-right: 1rem;
         @media (min-width: $mid-break) {
             right: 0;
         }
@@ -185,6 +185,7 @@ main {
     align-items: center;
     justify-content: space-between;
     background-color: var(--bg-color);
+	z-index: 100;
 }
 
 .description {

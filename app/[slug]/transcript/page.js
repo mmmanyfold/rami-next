@@ -35,6 +35,15 @@ function TranscriptPage() {
           >
             <CaretLeft />
           </div>
+          <div className="mobile-arrows hide-desktop">
+            <div
+              className="arrow left"
+              onClick={() => router.push("/" + projectSlug)}
+              role="button"
+            >
+              <CaretLeft size={30} />
+            </div>
+          </div>
         </>
       )}
     </>
