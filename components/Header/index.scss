@@ -42,7 +42,6 @@ header {
     }
     
     .mobile-toggle-wrapper {
-        margin-top: 0.2rem;
         @media screen and (min-width: $mid-break) {
             display: none;
         }

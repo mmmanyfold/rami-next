@@ -1,7 +1,7 @@
 @import '../../variables.scss';
 
 .info {
-    padding-bottom: 2rem;
+    padding: 0 1.35rem 2rem 1.35rem;
 
     @media (min-width: $mid-break) {
         display: flex;
@@ -41,24 +41,6 @@
 	ul {
 		padding-left: 0.8rem;
 		margin: 0;
-	}
-
-	.hide-desktop {
-		position: fixed;
-		width: 100%;
-		overflow-y: scroll;
-
-		.bio {
-			position: fixed;
-			background-color: var(--bg-color);
-			padding: 0 1.35rem;
-			hr {
-				margin: 0;
-			}
-		}
-		.accordion {
-			padding: 1.35rem;
-		}
 	}
 
 	.column {

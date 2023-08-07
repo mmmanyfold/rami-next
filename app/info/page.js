@@ -1,5 +1,5 @@
 "use client";
-import { Fragment, useState, useEffect, useRef } from "react";
+import { Fragment, useState, useEffect } from "react";
 import { RichTextCollection } from "@/components/notion";
 import CVSection from "@/components/CVSection";
 import InfoSection from "@/components/InfoSection";
@@ -39,10 +39,6 @@ function processExhibitionsScreenings(data) {
 function InfoPage() {
   const [data, setData] = useState(null);
   const [activeSection, setActiveSection] = useState("Info");
-  const [innerHeight, setInnerHeight] = useState(0);
-  const [bioHeight, setBioHeight] = useState(0);
-
-  const bioRef = useRef(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -64,19 +60,6 @@ function InfoPage() {
     };
     fetchData();
   }, []);
-
-  useEffect(() => {
-    const handleResize = () => setInnerHeight(window.innerHeight);
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
-  useEffect(() => {
-    if (data && bioRef?.current) {
-      setBioHeight(bioRef.current.clientHeight);
-    }
-  }, [data, bioRef]);
 
   if (!data) {
     return null;
@@ -159,12 +142,10 @@ function InfoPage() {
     <div className="info">
       {/* column left */}
       <div className="column">
+
         {/* mobile */}
-        <div
-          className="hide-desktop"
-          style={{ height: `${innerHeight - 56.4}px` }}
-        >
-          <section className="bio" ref={bioRef}>
+        <div className="hide-desktop">
+          <section>
             <h1>About</h1>
             <p>
               <RichTextCollection objects={bio} />
@@ -179,55 +160,48 @@ function InfoPage() {
             <hr />
           </section>
 
-          <div
-            className="accordion"
-            style={{ paddingTop: `${bioHeight + 10}px` }}
-          >
-            <SectionDrawer
-              name="Current & Forthcoming"
-              type="info"
-              items={info.itemsByKey["Current & Forthcoming"]}
-            />
-            <hr />
+          <SectionDrawer
+            name="Current & Forthcoming"
+            type="info"
+            items={info.itemsByKey["Current & Forthcoming"]}
+          />
+          <hr />
 
-            <section>
-              <SectionToggle
-                label="Exhibitions & Screenings"
-                isActive={activeSection === "Exhibitions & Screenings"}
-                onToggle={() => toggleSection("Exhibitions & Screenings")}
-              />
-              {activeSection === "Exhibitions & Screenings" && (
-                <div>
-                  {exhibitionsScreenings.years.map((year) => (
-                    <CVSection
-                      key={year}
-                      name={year}
-                      items={exhibitionsScreenings.itemsByKey[year]}
-                      isNested={true}
-                    />
-                  ))}
-                </div>
-              )}
-            </section>
-            <hr />
-
-            {cvAdditional.tags.map((tag, i) => (
-              <Fragment key={tag}>
-                <SectionDrawer
-                  name={tag}
-                  type="cv"
-                  items={cvAdditional.itemsByKey[tag]}
+          <SectionToggle
+            label="Exhibitions & Screenings"
+            isActive={activeSection === "Exhibitions & Screenings"}
+            onToggle={() => toggleSection("Exhibitions & Screenings")}
+          />
+          {activeSection === "Exhibitions & Screenings" && (
+            <div>
+              {exhibitionsScreenings.years.map((year) => (
+                <CVSection
+                  key={year}
+                  name={year}
+                  items={exhibitionsScreenings.itemsByKey[year]}
+                  isNested={true}
                 />
-                <hr />
-              </Fragment>
-            ))}
+              ))}
+            </div>
+          )}
+          <hr />
 
-            <SectionDrawer name="Imprint">
-              <div className="imprint">
-                <RichTextCollection objects={imprint} linkArrow={true} />
-              </div>
-            </SectionDrawer>
-          </div>
+          {cvAdditional.tags.map((tag, i) => (
+            <Fragment key={tag}>
+              <SectionDrawer
+                name={tag}
+                type="cv"
+                items={cvAdditional.itemsByKey[tag]}
+              />
+              <hr />
+            </Fragment>
+          ))}
+
+          <SectionDrawer name="Imprint">
+            <div className="imprint">
+              <RichTextCollection objects={imprint} linkArrow={true} />
+            </div>
+          </SectionDrawer>
         </div>
 
         {/* desktop */}
