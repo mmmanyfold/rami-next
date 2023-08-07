@@ -1,5 +1,6 @@
-import { RichTextCollection, RichTextObject } from "../notion";
+import { RichTextObject } from "../notion";
 import ZoomImage from "../ZoomImage";
+import VideoDialog from "../VideoDialog";
 import "./index.scss";
 
 const Block = ({ block }) => {
@@ -33,24 +34,27 @@ const Block = ({ block }) => {
         </>
       );
     case "video":
-      const urlSegments = block.video.external.url.split("/");
-      const vimeoId = urlSegments[urlSegments.length - 1];
-      return (
-        <>
-          <div className="video-container">
-            <iframe
-              title="Project Video"
-              src={`https://player.vimeo.com/video/${vimeoId}`}
-              frameBorder="0"
-              allow="autoplay; fullscreen"
-              allowFullScreen
-            />
-          </div>
-          {block.video.caption && (
-            <p className="caption">{block.video.caption[0].plain_text}</p>
-          )}
-        </>
-      );
+      if (block.video.type === "external") {
+        const urlSegments = block.video.external.url.split("/");
+        const vimeoId = urlSegments[urlSegments.length - 1];
+        return (
+          <>
+            <div className="video-container">
+              <iframe
+                title="Project Video"
+                src={`https://player.vimeo.com/video/${vimeoId}`}
+                allow="autoplay; fullscreen"
+                allowFullScreen
+              />
+            </div>
+            {block.video.caption && (
+              <p className="caption">{block.video.caption[0].plain_text}</p>
+            )}
+          </>
+        );
+      }
+      return <VideoDialog block={block.video} />;
+
     case "embed":
       return (
         <div className="embed-container">
