@@ -49,7 +49,7 @@ function ProjectsList({ projects }) {
       </div>
 
       {activeView === "list" ? (
-        <ul>
+        <ul className="plain-list">
           {!!projects?.length ? (
             projects.map(({ id, title, slug, year, tags }) => {
               const [first, ...rest] = title.split(",");

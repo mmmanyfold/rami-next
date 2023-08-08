@@ -94,9 +94,12 @@ sup {
 }
 
 ul {
-	list-style-type: none;
 	padding: 0;
 	margin: 0;
+
+	&.plain-list {
+		list-style-type: none;
+	}
 }
 
 li.notion-bulleted-list-item {

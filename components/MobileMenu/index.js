@@ -21,7 +21,7 @@ function MobileMenu({ isOpen, onToggle }) {
             unmountOnExit
           >
             <div className="container" onClick={onToggle}>
-              <ul>
+              <ul className="plain-list">
                 <li>
                   <a href="/">INDEX</a>
                 </li>
