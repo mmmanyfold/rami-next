@@ -1,10 +1,11 @@
 import React from "react";
 
-function GridIcon({ size = 20, className = null }) {
+function GridIcon({ size = 20, className, style }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       className={className}
+      style={style}
       width={size}
       height={size}
       fill="currentColor"

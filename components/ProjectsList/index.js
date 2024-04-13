@@ -1,24 +1,14 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { LayoutContext } from "@/app/layout";
 import ProjectsGrid from "../ProjectsGrid";
 import RowsIcon from "../../icon/RowsIcon";
 import GridIcon from "../../icon/GridIcon";
 import "./index.scss";
 
 function ProjectsList({ projects }) {
-  const [activeView, setActiveView] = useState("gallery");
   const [innerWidth, setInnerWidth] = useState(0);
-
-  useEffect(() => {
-    const cachedView = JSON.parse(localStorage.getItem("activeView"));
-    if (cachedView) {
-      setActiveView(cachedView);
-    }
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem("activeView", JSON.stringify(activeView));
-  }, [activeView]);
+  const { projectsView, setProjectsView } = useContext(LayoutContext);
 
   useEffect(() => {
     const handleResize = () => setInnerWidth(window.innerWidth);
@@ -32,23 +22,23 @@ function ProjectsList({ projects }) {
       <div className="header">
         <div
           role="button"
-          className={activeView === "list" ? "active" : ""}
-          onClick={() => setActiveView("list")}
+          className={projectsView === "list" ? "active" : ""}
+          onClick={() => setProjectsView("list")}
         >
-          TEXT <span />
-          <RowsIcon />
+          <span>TEXT</span>
+          <RowsIcon style={{ marginTop: "-2px", marginLeft: "4px" }} />
         </div>
         <div
           role="button"
-          className={activeView === "gallery" ? "active" : ""}
-          onClick={() => setActiveView("gallery")}
+          className={projectsView === "gallery" ? "active" : ""}
+          onClick={() => setProjectsView("gallery")}
         >
-          <GridIcon />
-          <span /> GALLERY
+          <GridIcon style={{ marginTop: "-2px", marginRight: "4px" }} />
+          <span>GALLERY</span>
         </div>
       </div>
 
-      {activeView === "list" ? (
+      {projectsView === "list" ? (
         <ul className="plain-list">
           {!!projects?.length ? (
             projects.map(({ id, title, slug, year, tags }) => {
@@ -88,7 +78,7 @@ function ProjectsList({ projects }) {
             <li></li>
           )}
         </ul>
-      ) : activeView === "gallery" ? (
+      ) : projectsView === "gallery" ? (
         <ProjectsGrid projects={projects} />
       ) : null}
     </div>

@@ -1,11 +1,25 @@
 "use client";
 import "../globals.scss";
-import { useState } from "react";
+import { useState, useEffect, createContext } from "react";
 import Header from "../components/Header";
 import MobileMenu from "../components/MobileMenu";
 
+export const LayoutContext = createContext(null);
+
 function RootLayout({ children }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [projectsView, setProjectsView] = useState("gallery");
+
+  useEffect(() => {
+    const cachedView = JSON.parse(localStorage.getItem("projectsView"));
+    if (cachedView) {
+      setProjectsView(cachedView);
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("projectsView", JSON.stringify(projectsView));
+  }, [projectsView]);
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
@@ -14,12 +28,14 @@ function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <Header
-          mobileMenuOpen={mobileMenuOpen}
-          toggleMobileMenu={toggleMobileMenu}
-        />
-        <MobileMenu isOpen={mobileMenuOpen} onToggle={toggleMobileMenu} />
-        <main>{children}</main>
+        <LayoutContext.Provider value={{ projectsView, setProjectsView }}>
+          <Header
+            mobileMenuOpen={mobileMenuOpen}
+            toggleMobileMenu={toggleMobileMenu}
+          />
+          <MobileMenu isOpen={mobileMenuOpen} onToggle={toggleMobileMenu} />
+          <main>{children}</main>
+        </LayoutContext.Provider>
       </body>
     </html>
   );

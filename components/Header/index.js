@@ -1,11 +1,20 @@
+import { useContext } from "react";
+import { LayoutContext } from "@/app/layout";
 import "./index.scss";
 
 function Header({ mobileMenuOpen, toggleMobileMenu }) {
+  const { setProjectsView } = useContext(LayoutContext);
+
   return (
     <header>
-      <div className="title">RAMI GEORGE</div>
+      <a href="/"
+        className="title"
+        onClick={() => setProjectsView("gallery")}
+      >
+        RAMI GEORGE
+      </a>
       <div className="nav-links">
-        <a href="/">INDEX</a>
+        <a href="/" onClick={() => setProjectsView("list")}>INDEX</a>
         <a href="/info">INFO</a>
       </div>
       <div className="mobile-toggle-wrapper">
