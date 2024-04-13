@@ -89,7 +89,7 @@ function InfoPage() {
             <hr />
             <h1>Contact</h1>
             <p>
-              <a href="mailto:ramimgeorge@gmail.com">
+              <a target="_blank" href="mailto:ramimgeorge@gmail.com">
                 rami.m.george (at) gmail.com
               </a>
             </p>
@@ -153,7 +153,7 @@ function InfoPage() {
             <hr />
             <h1>Contact</h1>
             <p>
-              <a href="mailto:ramimgeorge@gmail.com">
+              <a target="_blank" href="mailto:ramimgeorge@gmail.com">
                 rami.m.george (at) gmail.com
               </a>
             </p>

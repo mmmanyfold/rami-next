@@ -6,7 +6,7 @@ function CVItem({ title, description, detail, url, download, isNested }) {
   return (
     <li className={`cv-section ${isNested ? "nested" : ""}`}>
       {url || download ? (
-        <a href={url || download[0].url} target="_blank">
+        <a target="_blank" href={url || download[0].url}>
           <span className="title">
             <RichTextCollection objects={title} />
           </span>

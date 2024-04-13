@@ -63,7 +63,7 @@ const ProjectAside = ({ project, view }) => {
                 )}
                 {project.exhibitionGuide && (
                   <>
-                    <a href={project.exhibitionGuide} target="_blank">
+                    <a target="_blank" href={project.exhibitionGuide}>
                       Exhibition Guide
                     </a>
                     <br />
@@ -72,7 +72,7 @@ const ProjectAside = ({ project, view }) => {
                 )}
                 {project.exhibitionPublication && (
                   <>
-                    <a href={project.exhibitionPublication} target="_blank">
+                    <a target="_blank" href={project.exhibitionPublication}>
                       Exhibition Publication
                     </a>
                     <br />

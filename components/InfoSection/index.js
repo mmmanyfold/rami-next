@@ -6,7 +6,7 @@ const ListItem = ({ item }) => {
   return (
     <li>
       {item["url"] || item["download"] ? (
-        <a href={item["url"] || item["download"][0]["url"]}>
+        <a target="_blank" href={item["url"] || item["download"][0]["url"]}>
           {item["line-1"] && (
             <span className="title">
               <RichTextCollection objects={item["line-1"]} />
