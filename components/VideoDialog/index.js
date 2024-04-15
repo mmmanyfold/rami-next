@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
 import X from "../../icon/X";
+import { RichTextCollection } from "../notion";
 
 const VideoDialog = ({ block }) => {
   const [contentHeight, setContentHeight] = useState(window.innerHeight - 118);
@@ -63,7 +64,10 @@ const VideoDialog = ({ block }) => {
           </Dialog.Content>
         </Dialog.Portal>
       </Dialog.Root>
-      {!!caption && <p className="caption">{caption[0].plain_text}</p>}
+      {!!caption &&
+        <div className="caption">
+          <RichTextCollection objects={caption} />
+        </div>}
     </>
   );
 };

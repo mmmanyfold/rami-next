@@ -1,4 +1,4 @@
-import { RichTextObject } from "../notion";
+import { RichTextObject, RichTextCollection } from "../notion";
 import ZoomImage from "../ZoomImage";
 import VideoDialog from "../VideoDialog";
 import "./index.scss";
@@ -23,14 +23,18 @@ const Block = ({ block }) => {
       );
     case "image":
       const caption = block.image.caption;
+      const imageAlt = caption ? caption.map(block => block.plain_text).join() : "";
       return (
         <>
           <ZoomImage
             src={block.image.file.url}
-            alt={caption ? caption[0].plain_text : ""}
+            alt={imageAlt}
             fullWidth={true}
           />
-          {!!caption && <p className="caption">{caption[0].plain_text}</p>}
+          {!!caption &&
+            <div className="caption">
+              <RichTextCollection objects={caption} />
+            </div>}
         </>
       );
     case "video":
@@ -48,7 +52,9 @@ const Block = ({ block }) => {
               />
             </div>
             {block.video.caption && (
-              <p className="caption">{block.video.caption[0].plain_text}</p>
+              <div className="caption">
+                <RichTextCollection objects={block.video.caption} />
+              </div>
             )}
           </>
         );
