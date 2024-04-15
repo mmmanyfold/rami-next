@@ -71,6 +71,7 @@ function InfoPage() {
     } else {
       setActiveSection(selected);
     }
+    document.getElementById('info-column-right').scrollTop = 0;
   };
 
   const { info, exhibitionsScreenings, cvAdditional, imprint } = data;
@@ -235,7 +236,9 @@ function InfoPage() {
       </div>
 
       {/* column right */}
-      <div className="column content">{content}</div>
+      <div id="info-column-right" className="column content">
+        {content}
+      </div>
     </div>
   );
 }
