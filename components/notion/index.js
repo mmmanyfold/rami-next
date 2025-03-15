@@ -2,7 +2,7 @@ import React from "react";
 import CaretUpRight from "@/icon/CaretUpRight";
 import "./index.scss";
 
-function RichTextObject({ object, color, linkArrow }) {
+function RichTextObject({ object, color, linkArrow = true }) {
   let textObject;
   let content;
   let linkUrl;

@@ -193,6 +193,12 @@ main {
 
 .description {
     color: $secondary-color;
+	a {
+		color: $secondary-color;
+		&:hover {
+			color: $accent-color;
+		}
+	}
 }
 
 iframe {
