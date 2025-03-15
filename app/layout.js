@@ -11,14 +11,14 @@ function RootLayout({ children }) {
   const [projectsView, setProjectsView] = useState("gallery");
 
   useEffect(() => {
-    const cachedView = JSON.parse(localStorage.getItem("projectsView"));
+    const cachedView = sessionStorage.getItem("projectsView");
     if (cachedView) {
       setProjectsView(cachedView);
     }
   }, []);
 
   useEffect(() => {
-    localStorage.setItem("projectsView", JSON.stringify(projectsView));
+    sessionStorage.setItem("projectsView", projectsView);
   }, [projectsView]);
 
   const toggleMobileMenu = () => {
