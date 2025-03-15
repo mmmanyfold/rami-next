@@ -90,8 +90,8 @@ function InfoPage() {
             <hr />
             <h1>Contact</h1>
             <p>
-              <a target="_blank" href="mailto:ramimgeorge@gmail.com">
-                rami.m.george (at) gmail.com
+              <a target="_blank" href="mailto:ramigeorge.studio@gmail.com">
+                {"ramigeorge.studio (at) gmail.com"}
               </a>
             </p>
           </section>
@@ -154,8 +154,8 @@ function InfoPage() {
             <hr />
             <h1>Contact</h1>
             <p>
-              <a target="_blank" href="mailto:ramimgeorge@gmail.com">
-                rami.m.george (at) gmail.com
+              <a target="_blank" href="mailto:ramigeorge.studio@gmail.com">
+                {"ramigeorge.studio (at) gmail.com"}
               </a>
             </p>
             <hr />
