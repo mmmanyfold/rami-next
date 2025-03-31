@@ -1,4 +1,5 @@
 import { RichTextCollection } from "../notion";
+import CaretUpRight from "@/icon/CaretUpRight";
 import "./index.scss";
 
 const ProjectAside = ({ project, view }) => {
@@ -64,7 +65,8 @@ const ProjectAside = ({ project, view }) => {
                 {project.exhibitionGuide && (
                   <>
                     <a target="_blank" href={project.exhibitionGuide}>
-                      Exhibition Guide
+                      <span>Exhibition Guide</span>
+                      <CaretUpRight />
                     </a>
                     <br />
                     <br />
@@ -73,7 +75,8 @@ const ProjectAside = ({ project, view }) => {
                 {project.exhibitionPublication && (
                   <>
                     <a target="_blank" href={project.exhibitionPublication}>
-                      Exhibition Publication
+                      <span>Exhibition Publication</span>
+                      <CaretUpRight />
                     </a>
                     <br />
                     <br />
