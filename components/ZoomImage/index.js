@@ -3,10 +3,15 @@ import { useState, useEffect } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 import X from "../../icon/X";
+import { BREAKPOINTS } from "../../config/breakpoints";
 import "./index.scss";
 
+const getContentHeight = () => {
+  return window.innerHeight - (window.innerWidth < BREAKPOINTS.MID ? 94 : 118);
+}
+
 const ZoomImage = ({ src, alt, fullWidth }) => {
-  const [contentHeight, setContentHeight] = useState(window.innerHeight - 118);
+  const [contentHeight, setContentHeight] = useState(getContentHeight());
   const [dialogOpen, setDialogOpen] = useState(false);
   const [zoomMode, setZoomMode] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
@@ -14,7 +19,7 @@ const ZoomImage = ({ src, alt, fullWidth }) => {
 
   useEffect(() => {
     function handleResize() {
-      setContentHeight(window.innerHeight - 118);
+      setContentHeight(getContentHeight());
     }
     window.addEventListener("resize", handleResize);
 
