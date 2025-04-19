@@ -12,17 +12,12 @@ function PressPage() {
   const pathname = usePathname();
   const router = useRouter();
 
-  const projectSlug = pathname.split("/")[1];
-
   useEffect(() => {
     const fetchData = async () => {
+      const projectSlug = pathname.split("/")[1];
       const projects = await loadProjects();
       const cvAdditionalRes = await loadData("cv-additional.json");
-      const exhibitionsRes = await loadData("cv-additional.json");
-
-      const exhibitions = exhibitionsRes?.data.rows || [];
-      const cvAdditional = cvAdditionalRes?.data.rows || [];
-      const pressItems = [...exhibitions, ...cvAdditional];
+      const pressItems = cvAdditionalRes?.data.rows || [];
 
       const currentProject = projects.find((p) => p?.slug === projectSlug);
       let blocks;
@@ -38,7 +33,7 @@ function PressPage() {
       setBlocks(blocks);
     };
     fetchData();
-  }, []);
+  }, [pathname]);
 
   if (!project) {
     return null;

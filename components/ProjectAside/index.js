@@ -48,6 +48,7 @@ const ProjectAside = ({ project, view }) => {
               project.exhibitionGuide ||
               project.exhibitionPublication ||
               project.miscellaneous ||
+              project.exhibitionPosters ||
               hasPress) && <hr />}
 
           <div className="links">
@@ -84,6 +85,22 @@ const ProjectAside = ({ project, view }) => {
                       isExternal={true}
                     />
                     <br />
+                    <br />
+                  </>
+                )}
+                {project.exhibitionPosters?.length > 0 && (
+                  <>
+                    {project.exhibitionPosters.map(({url}, index) => (
+                      <>
+                        <LinkWithArrow 
+                          key={`${index}-${url}`}
+                          href={url} 
+                          text={`Exhibition Poster ${index + 1}`} 
+                          isExternal={true}
+                        />
+                        <br />
+                      </>
+                    ))}
                     <br />
                   </>
                 )}
