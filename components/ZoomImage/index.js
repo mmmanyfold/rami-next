@@ -9,6 +9,8 @@ const ZoomImage = ({ src, alt, fullWidth }) => {
   const [contentHeight, setContentHeight] = useState(window.innerHeight - 118);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [zoomMode, setZoomMode] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
+  const [mouseDownPos, setMouseDownPos] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
     function handleResize() {
@@ -20,6 +22,28 @@ const ZoomImage = ({ src, alt, fullWidth }) => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
+  const handleTransformStart = () => {
+    setIsDragging(true);
+  };
+
+  const handleTransformEnd = () => {
+    setIsDragging(false);
+  };
+
+  const handleMouseDown = (e) => {
+    setMouseDownPos({ x: e.clientX, y: e.clientY });
+  };
+
+  const handleClick = (e) => {
+    const dx = e.clientX - mouseDownPos.x;
+    const dy = e.clientY - mouseDownPos.y;
+    const distance = Math.sqrt(dx * dx + dy * dy);
+    
+    if (distance < 5 && !isDragging) {
+      setZoomMode(false);
+    }
+  };
 
   return (
     <Dialog.Root
@@ -47,8 +71,16 @@ const ZoomImage = ({ src, alt, fullWidth }) => {
             </div>
           </Dialog.Close>
           {zoomMode ? (
-            <div className="zoom-image-container">
-              <TransformWrapper>
+            <div 
+              className="zoom-image-container"
+              onMouseDown={handleMouseDown}
+              onClick={handleClick}
+            >
+              <TransformWrapper
+                onTransformationStart={handleTransformStart}
+                onTransformationEnd={handleTransformEnd}
+                centerOnInit={true}
+              >
                 <TransformComponent
                   wrapperStyle={{
                     maxHeight: `${contentHeight}px`,
