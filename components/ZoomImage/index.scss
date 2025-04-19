@@ -22,6 +22,7 @@
     position: fixed;
     top: 56.4px;
     background-color: var(--bg-color);
+    z-index: 20;
 
     @media screen and (min-width: $mid-break) {
         top: 80px;
