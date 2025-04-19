@@ -4,6 +4,7 @@ import ProjectView from "../../../components/ProjectView";
 import { loadProjects } from "../../api";
 import { usePathname, useRouter } from "next/navigation";
 import CaretLeft from "../../../icon/CaretLeft";
+import MobileArrows from "../../../components/MobileArrows";
 
 function TranscriptPage() {
   const [project, setProject] = useState(null);
@@ -35,15 +36,9 @@ function TranscriptPage() {
           >
             <CaretLeft />
           </div>
-          <div className="mobile-arrows hide-desktop">
-            <div
-              className="arrow left"
-              onClick={() => router.push("/" + projectSlug)}
-              role="button"
-            >
-              <CaretLeft size={30} />
-            </div>
-          </div>
+          <MobileArrows 
+            onLeftClick={() => router.push("/" + projectSlug)}
+          />
         </>
       )}
     </>

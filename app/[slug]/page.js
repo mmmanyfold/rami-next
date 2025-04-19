@@ -3,6 +3,7 @@ import ProjectView from "../../components/ProjectView";
 import CaretLeft from "../../icon/CaretLeft";
 import CaretRight from "../../icon/CaretRight";
 import Footnotes from "../../components/Footnotes";
+import MobileArrows from "../../components/MobileArrows";
 import { loadProjects } from "../api";
 import { useRouter, usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -63,22 +64,10 @@ function ProjectPage() {
         <CaretRight />
       </div>
 
-      <div className="mobile-arrows hide-desktop">
-        <div
-          className="arrow left"
-          onClick={() => router.push(prev.slug)}
-          role="button"
-        >
-          <CaretLeft size={30} />
-        </div>
-        <div
-          className="arrow right"
-          onClick={() => router.push(next.slug)}
-          role="button"
-        >
-          <CaretRight size={30} />
-        </div>
-      </div>
+      <MobileArrows 
+        onLeftClick={() => router.push(prev.slug)}
+        onRightClick={() => router.push(next.slug)}
+      />
 
       {projects && <Footnotes projects={projects} />}
     </>

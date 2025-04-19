@@ -4,6 +4,7 @@ import { useRouter, usePathname } from "next/navigation";
 import ProjectView from "../../../components/ProjectView";
 import { loadData, loadProjects } from "../../api";
 import CaretLeft from "@/icon/CaretLeft";
+import MobileArrows from "../../../components/MobileArrows";
 
 function PressPage() {
   const [project, setProject] = useState(null);
@@ -53,15 +54,9 @@ function PressPage() {
       >
         <CaretLeft />
       </div>
-      <div className="mobile-arrows hide-desktop">
-        <div
-          className="arrow left"
-          onClick={() => router.push("/" + projectSlug)}
-          role="button"
-        >
-          <CaretLeft size={30} />
-        </div>
-      </div>
+      <MobileArrows 
+        onLeftClick={() => router.push("/" + projectSlug)}
+      />
     </>
   );
 }

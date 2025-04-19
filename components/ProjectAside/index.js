@@ -1,5 +1,5 @@
 import { RichTextCollection } from "../notion";
-import CaretUpRight from "@/icon/CaretUpRight";
+import LinkWithArrow from "../LinkWithArrow";
 import "./index.scss";
 
 const ProjectAside = ({ project, view }) => {
@@ -57,27 +57,32 @@ const ProjectAside = ({ project, view }) => {
               <>
                 {project.transcript?.uuid && (
                   <>
-                    <a href={"/" + project.slug + "/transcript"}>Transcript</a>
+                    <LinkWithArrow 
+                      href={"/" + project.slug + "/transcript"} 
+                      text="Transcript"
+                    />
                     <br />
                     <br />
                   </>
                 )}
                 {project.exhibitionGuide && (
                   <>
-                    <a target="_blank" href={project.exhibitionGuide}>
-                      <span>Exhibition Guide</span>
-                      <CaretUpRight />
-                    </a>
+                    <LinkWithArrow 
+                      href={project.exhibitionGuide} 
+                      text="Exhibition Guide" 
+                      isExternal={true}
+                    />
                     <br />
                     <br />
                   </>
                 )}
                 {project.exhibitionPublication && (
                   <>
-                    <a target="_blank" href={project.exhibitionPublication}>
-                      <span>Exhibition Publication</span>
-                      <CaretUpRight />
-                    </a>
+                    <LinkWithArrow 
+                      href={project.exhibitionPublication} 
+                      text="Exhibition Publication" 
+                      isExternal={true}
+                    />
                     <br />
                     <br />
                   </>
@@ -89,7 +94,16 @@ const ProjectAside = ({ project, view }) => {
                     <br />
                   </>
                 )}
-                {hasPress && <a href={"/" + project.slug + "/press"}>Press</a>}
+                {hasPress && (
+                  <>
+                    <LinkWithArrow 
+                      href={"/" + project.slug + "/press"} 
+                      text="Press"
+                    />
+                    <br />
+                    <br />
+                  </>
+                )}
               </>
             )}
           </div>
