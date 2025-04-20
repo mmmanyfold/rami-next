@@ -34,13 +34,13 @@ const ZoomImage = ({ imageBlock, allImageBlocks }) => {
     };
   }, []);
 
-  const handleTransformStart = () => {
+  const handleTransformStart = useCallback(() => {
     setIsDragging(true);
-  };
+  }, []);
 
-  const handleTransformEnd = () => {
+  const handleTransformEnd = useCallback(() => {
     setIsDragging(false);
-  };
+  }, []);
 
   const handleMouseDown = (e) => {
     setMouseDownPos({ x: e.clientX, y: e.clientY });
@@ -56,7 +56,10 @@ const ZoomImage = ({ imageBlock, allImageBlocks }) => {
     }
   };
 
-  const currentZoomIndex = allImageBlocks.indexOf(zoomImageBlock)
+  const currentZoomIndex = useMemo(() => 
+    allImageBlocks.indexOf(zoomImageBlock),
+    [allImageBlocks, zoomImageBlock]
+  );
 
   const handlePreviousClick = useCallback(() => {
     const prevImageUrl = 
