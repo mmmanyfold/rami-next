@@ -1,15 +1,15 @@
 export const processItemsByKey = (items, key) => {
   return items.reduce(
     (ret, item) => {
-      const v = item[key];
-      if (ret.itemsByKey[v]) {
-        ret.itemsByKey[v] = [...ret.itemsByKey[v], item];
+      const val = item[key];
+      if (ret.itemsByKey[val]) {
+        ret.itemsByKey[val] = [...ret.itemsByKey[val], item];
       } else {
-        ret.itemsByKey[v] = [item];
-        ret.values = [...ret.values, v];
+        ret.itemsByKey[val] = [item];
+        ret.keys = [...ret.keys, val];
       }
       return ret;
     },
-    { itemsByKey: {}, values: [] }
+    { itemsByKey: {}, keys: [] }
   );
 };

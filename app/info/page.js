@@ -19,21 +19,38 @@ const cvTags = [
   "Education"
 ];
 
-function processInfo(data) {
-  const sorted = data.rows.sort((a, b) => (a.id < b.id ? 1 : -1));
-  const processed = processItemsByKey(sorted, "tag");
-  return { ...processed, tags: infoTags };
+function processInfo(rows) {
+  if (!rows) {
+    return { itemsByKey: {}, tags: [] };
+  }
+  const sortedRows = rows.sort((a, b) => (a.id < b.id ? 1 : -1));
+  const { itemsByKey } = processItemsByKey(sortedRows, "tag");
+  return { 
+    itemsByKey, 
+    tags: infoTags 
+  }
 }
 
-function processCvAdditional(data) {
-  const processed = processItemsByKey(data.rows, "tag");
-  return { ...processed, tags: cvTags };
+function processCvDataByTag(rows) {
+  if (!rows) {
+    return { itemsByKey: {}, tags: [] };
+  }
+  const { itemsByKey } = processItemsByKey(rows, "tag");
+  return { 
+    itemsByKey, 
+    tags: cvTags 
+  }
 }
 
-function processExhibitionsScreenings(data) {
-  const processed = processItemsByKey(data.rows, "year");
-  const years = processed.values.sort().reverse();
-  return { ...processed, years };
+function processCvDataByYear(rows) {
+  if (!rows) {
+    return { itemsByKey: {}, years: [] };
+  }
+  const { itemsByKey, keys } = processItemsByKey(rows, "year");
+  return { 
+    itemsByKey, 
+    years: keys.sort().reverse()
+  }
 }
 
 function InfoPage() {
@@ -49,12 +66,9 @@ function InfoPage() {
         "cv-exhibitions-and-screenings.json"
       );
       setData({
-        info: info?.data && processInfo(info.data),
-        exhibitionsScreenings:
-          exhibitionsScreenings?.data &&
-          processExhibitionsScreenings(exhibitionsScreenings.data),
-        cvAdditional:
-          cvAdditional?.data && processCvAdditional(cvAdditional.data),
+        info: processInfo(info.data.rows),
+        exhibitionsScreenings: processCvDataByYear(exhibitionsScreenings.data.rows),
+        cvAdditional: processCvDataByTag(cvAdditional.data.rows),
         imprint: imprint?.data?.blocks,
       });
     };
@@ -131,11 +145,20 @@ function InfoPage() {
       );
       break;
     default:
+      const activeSectionItems = cvAdditional.itemsByKey[activeSection];
+      const { itemsByKey, years } = processCvDataByYear(activeSectionItems);
       content = (
-        <CVSection
-          name={activeSection}
-          items={cvAdditional.itemsByKey[activeSection]}
-        />
+        <>
+          <h1>{activeSection}</h1>
+          {years.map((year) => (
+            <CVSection
+              key={year}
+              name={year}
+              items={itemsByKey[year]}
+              isNested={true}
+            />
+          ))}
+        </>
       );
   }
 
