@@ -1,9 +1,7 @@
 "use client";
 import ProjectView from "../../components/ProjectView";
-import CaretLeft from "../../icon/CaretLeft";
-import CaretRight from "../../icon/CaretRight";
 import Footnotes from "../../components/Footnotes";
-import MobileArrows from "../../components/MobileArrows";
+import NavArrows from "../../components/NavArrows";
 import { loadProjects } from "../api";
 import { useRouter, usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -49,26 +47,10 @@ function ProjectPage() {
   return (
     <>
       <ProjectView project={project} blocks={project.blocks} />
-      <div
-        className="desktop arrow left"
-        onClick={() => router.push(prev.slug)}
-        role="button"
-      >
-        <CaretLeft />
-      </div>
-      <div
-        className="desktop arrow right"
-        onClick={() => router.push(next.slug)}
-        role="button"
-      >
-        <CaretRight />
-      </div>
-
-      <MobileArrows 
+      <NavArrows 
         onLeftClick={() => router.push(prev.slug)}
         onRightClick={() => router.push(next.slug)}
       />
-
       {projects && <Footnotes projects={projects} />}
     </>
   );

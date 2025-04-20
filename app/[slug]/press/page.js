@@ -3,8 +3,7 @@ import { useState, useEffect } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import ProjectView from "../../../components/ProjectView";
 import { loadData, loadProjects } from "../../api";
-import CaretLeft from "@/icon/CaretLeft";
-import MobileArrows from "../../../components/MobileArrows";
+import NavArrows from "../../../components/NavArrows";
 
 function PressPage() {
   const [project, setProject] = useState(null);
@@ -42,14 +41,7 @@ function PressPage() {
   return (
     <>
       <ProjectView project={project} blocks={blocks} view="Press" />
-      <div
-        className="desktop arrow left"
-        onClick={() => router.push("/" + projectSlug)}
-        role="button"
-      >
-        <CaretLeft />
-      </div>
-      <MobileArrows 
+      <NavArrows 
         onLeftClick={() => router.push("/" + projectSlug)}
       />
     </>

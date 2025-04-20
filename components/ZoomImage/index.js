@@ -1,7 +1,8 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
+import NavArrows from "../NavArrows";
 import X from "../../icon/X";
 import { BREAKPOINTS } from "../../config/breakpoints";
 import "./index.scss";
@@ -10,10 +11,16 @@ const getContentHeight = () => {
   return window.innerHeight - (window.innerWidth < BREAKPOINTS.MID ? 94 : 118);
 }
 
-const ZoomImage = ({ src, alt, fullWidth }) => {
+const getImageAlt = (block) => {
+  return block.caption?.map(block => block.plain_text).join();
+}
+
+const ZoomImage = ({ imageBlock, allImageBlocks }) => {
   const [contentHeight, setContentHeight] = useState(getContentHeight());
   const [dialogOpen, setDialogOpen] = useState(false);
+  const [zoomImageBlock, setZoomImageBlock] = useState(imageBlock);
   const [zoomMode, setZoomMode] = useState(false);
+  
   const [isDragging, setIsDragging] = useState(false);
   const [mouseDownPos, setMouseDownPos] = useState({ x: 0, y: 0 });
 
@@ -22,7 +29,6 @@ const ZoomImage = ({ src, alt, fullWidth }) => {
       setContentHeight(getContentHeight());
     }
     window.addEventListener("resize", handleResize);
-
     return (_) => {
       window.removeEventListener("resize", handleResize);
     };
@@ -50,21 +56,58 @@ const ZoomImage = ({ src, alt, fullWidth }) => {
     }
   };
 
+  const currentZoomIndex = allImageBlocks.indexOf(zoomImageBlock)
+
+  const handlePreviousClick = useCallback(() => {
+    const prevImageUrl = 
+      currentZoomIndex > 0 ? (
+        allImageBlocks[currentZoomIndex - 1]
+      ) : (
+        allImageBlocks[allImageBlocks.length - 1]
+      )
+    setZoomImageBlock(prevImageUrl);
+    setZoomMode(false);
+  }, [allImageBlocks, currentZoomIndex])
+
+  const handleNextClick = useCallback(() => {
+    const nextImageUrl = currentZoomIndex < allImageBlocks.length - 1 ? (
+      allImageBlocks[currentZoomIndex + 1]
+    ) : (
+      allImageBlocks[0]
+    );
+    setZoomImageBlock(nextImageUrl);
+    setZoomMode(false);
+  }, [allImageBlocks, currentZoomIndex])
+
+  const zoomImage = useMemo(() => (
+    <img
+      src={zoomImageBlock.file.url}
+      alt={getImageAlt(zoomImageBlock)}
+      loading="lazy"
+      style={{
+        height: "100%",
+        maxWidth: "100%",
+        objectFit: "contain",
+      }}
+    />
+  ), [zoomImageBlock]);
+
   return (
     <Dialog.Root
       open={dialogOpen}
       onOpenChange={(open) => {
         setDialogOpen(open);
+        setZoomImageBlock(imageBlock);
         setZoomMode(false);
       }}
     >
       <Dialog.Trigger asChild>
         <img
-          className="zoom-trigger"
-          src={src}
-          style={fullWidth ? { width: "100%" } : null}
-          alt={alt}
+          src={imageBlock.file.url}
+          alt={getImageAlt(imageBlock)}
           loading="lazy"
+          className="zoom-trigger"
+          style={{ width: "100%" }}
         />
       </Dialog.Trigger>
       <Dialog.Portal>
@@ -93,7 +136,7 @@ const ZoomImage = ({ src, alt, fullWidth }) => {
                     margin: "auto",
                   }}
                 >
-                  <img src={src} alt={alt} loading="lazy" />
+                  {zoomImage}
                 </TransformComponent>
               </TransformWrapper>
             </div>
@@ -106,18 +149,13 @@ const ZoomImage = ({ src, alt, fullWidth }) => {
               onClick={() => setZoomMode(true)}
               role="button"
             >
-              <img
-                src={src}
-                alt={alt}
-                loading="lazy"
-                style={{
-                  height: "100%",
-                  maxWidth: "100%",
-                  objectFit: "contain",
-                }}
-              />
+              {zoomImage}
             </div>
           )}
+          <NavArrows 
+            onLeftClick={handlePreviousClick}
+            onRightClick={handleNextClick}
+          />
         </Dialog.Content>
       </Dialog.Portal>
     </Dialog.Root>

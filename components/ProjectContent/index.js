@@ -1,9 +1,11 @@
+"use client";
+import { useMemo } from "react";
 import { RichTextObject, RichTextCollection } from "../notion";
 import ZoomImage from "../ZoomImage";
 import VideoDialog from "../VideoDialog";
 import "./index.scss";
 
-const Block = ({ block }) => {
+const Block = ({ block, allImageBlocks }) => {
   switch (block.type) {
     case "code":
       return (
@@ -22,19 +24,17 @@ const Block = ({ block }) => {
         </p>
       );
     case "image":
-      const caption = block.image.caption;
-      const imageAlt = caption ? caption.map(block => block.plain_text).join() : "";
       return (
         <>
           <ZoomImage
-            src={block.image.file.url}
-            alt={imageAlt}
-            fullWidth={true}
+            imageBlock={block.image}
+            allImageBlocks={allImageBlocks}
           />
-          {!!caption &&
+          {!!block.image.caption && (
             <div className="caption">
-              <RichTextCollection objects={caption} />
-            </div>}
+              <RichTextCollection objects={block.image.caption} />
+            </div>
+          )}
         </>
       );
     case "video":
@@ -73,10 +73,18 @@ const Block = ({ block }) => {
 };
 
 function ProjectContent({ blocks }) {
+  const allImageBlocks = useMemo(() => {
+    return blocks.filter(block => block.type === "image").map(block => block.image);
+  }, [blocks])
+  
   return (
     <>
       {blocks?.map((block, i) => (
-        <Block key={`${block.type}-${i}`} block={block} />
+        <Block 
+          key={`${block.type}-${i}`} 
+          block={block} 
+          allImageBlocks={allImageBlocks} 
+        />
       ))}
     </>
   );

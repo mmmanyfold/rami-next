@@ -3,8 +3,7 @@ import { useEffect, useState } from "react";
 import ProjectView from "../../../components/ProjectView";
 import { loadProjects } from "../../api";
 import { usePathname, useRouter } from "next/navigation";
-import CaretLeft from "../../../icon/CaretLeft";
-import MobileArrows from "../../../components/MobileArrows";
+import NavArrows from "../../../components/NavArrows";
 
 function TranscriptPage() {
   const [project, setProject] = useState(null);
@@ -29,14 +28,7 @@ function TranscriptPage() {
             blocks={project.transcript.blocks}
             view="Transcript"
           />
-          <div
-            className="desktop arrow left"
-            onClick={() => router.push("/" + projectSlug)}
-            role="button"
-          >
-            <CaretLeft />
-          </div>
-          <MobileArrows 
+          <NavArrows 
             onLeftClick={() => router.push("/" + projectSlug)}
           />
         </>
