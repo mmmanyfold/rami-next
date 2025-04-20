@@ -7,8 +7,12 @@ import X from "../../icon/X";
 import { BREAKPOINTS } from "../../config/breakpoints";
 import "./index.scss";
 
+const isMobile = () => {
+  return window.innerWidth < BREAKPOINTS.MID;
+}
+
 const getContentHeight = () => {
-  return window.innerHeight - (window.innerWidth < BREAKPOINTS.MID ? 94 : 118);
+  return window.innerHeight - (isMobile() ? 94 : 118);
 }
 
 const getImageAlt = (block) => {
@@ -61,16 +65,25 @@ const ZoomImage = ({ imageBlock, allImageBlocks }) => {
     [allImageBlocks, zoomImageBlock]
   );
 
+  const navCallback = () => {
+    setZoomMode(false);
+    if (isMobile()) {
+      setTimeout(() => {
+        setZoomMode(true);
+      }, 250);
+    }
+  };
+
   const handlePreviousClick = useCallback(() => {
     const prevIndex = (currentZoomIndex - 1 + allImageBlocks.length) % allImageBlocks.length;
     setZoomImageBlock(allImageBlocks[prevIndex]);
-    setZoomMode(false);
+    navCallback();
   }, [allImageBlocks, currentZoomIndex])
 
   const handleNextClick = useCallback(() => {
     const nextIndex = (currentZoomIndex + 1) % allImageBlocks.length;
     setZoomImageBlock(allImageBlocks[nextIndex]);
-    setZoomMode(false);
+    navCallback();
   }, [allImageBlocks, currentZoomIndex])
 
   const zoomImage = useMemo(() => (
@@ -92,7 +105,8 @@ const ZoomImage = ({ imageBlock, allImageBlocks }) => {
       onOpenChange={(open) => {
         setDialogOpen(open);
         setZoomImageBlock(imageBlock);
-        setZoomMode(false);
+        // Default to true on mobile.
+        setZoomMode(isMobile());
       }}
     >
       <Dialog.Trigger asChild>
