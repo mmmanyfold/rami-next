@@ -210,16 +210,31 @@ function InfoPage() {
           )}
           <hr />
 
-          {cvAdditional.tags.map((tag, i) => (
-            <Fragment key={tag}>
-              <SectionDrawer
-                name={tag}
-                type="cv"
-                items={cvAdditional.itemsByKey[tag]}
-              />
-              <hr />
-            </Fragment>
-          ))}
+          {cvAdditional.tags.map((tag) => {
+            const { itemsByKey, years } = processCvDataByYear(cvAdditional.itemsByKey[tag]);
+            return (
+              <Fragment key={tag}>
+                <SectionToggle
+                  label={tag}
+                  isActive={activeSection === tag}
+                  onToggle={() => toggleSection(tag)}
+                />
+                {activeSection === tag && (
+                  <div>
+                    {years.map((year) => (
+                      <CVSection
+                        key={year}
+                        name={year}
+                        items={itemsByKey[year]}
+                        isNested={true}
+                      />
+                    ))}
+                  </div>
+                )}
+                <hr />
+              </Fragment>
+            )
+          })}
 
           <SectionDrawer name="Imprint">
             <div className="imprint">
