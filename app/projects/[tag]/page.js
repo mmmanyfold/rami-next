@@ -23,7 +23,7 @@ function TagPage() {
       setProjects(filtered);
     };
     fetchData();
-  }, []);
+  }, [pathname]);
 
   return <ProjectsList projects={projects} />;
 }

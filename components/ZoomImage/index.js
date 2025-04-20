@@ -62,23 +62,14 @@ const ZoomImage = ({ imageBlock, allImageBlocks }) => {
   );
 
   const handlePreviousClick = useCallback(() => {
-    const prevImageUrl = 
-      currentZoomIndex > 0 ? (
-        allImageBlocks[currentZoomIndex - 1]
-      ) : (
-        allImageBlocks[allImageBlocks.length - 1]
-      )
-    setZoomImageBlock(prevImageUrl);
+    const prevIndex = (currentZoomIndex - 1 + allImageBlocks.length) % allImageBlocks.length;
+    setZoomImageBlock(allImageBlocks[prevIndex]);
     setZoomMode(false);
   }, [allImageBlocks, currentZoomIndex])
 
   const handleNextClick = useCallback(() => {
-    const nextImageUrl = currentZoomIndex < allImageBlocks.length - 1 ? (
-      allImageBlocks[currentZoomIndex + 1]
-    ) : (
-      allImageBlocks[0]
-    );
-    setZoomImageBlock(nextImageUrl);
+    const nextIndex = (currentZoomIndex + 1) % allImageBlocks.length;
+    setZoomImageBlock(allImageBlocks[nextIndex]);
     setZoomMode(false);
   }, [allImageBlocks, currentZoomIndex])
 

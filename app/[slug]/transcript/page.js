@@ -17,7 +17,7 @@ function TranscriptPage() {
       setProject(projects.find((p) => p?.slug === projectSlug));
     };
     fetchData();
-  }, []);
+  }, [projectSlug]);
 
   return (
     <>
