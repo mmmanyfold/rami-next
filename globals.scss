@@ -73,8 +73,12 @@ button:focus:not(:focus-visible) {
 
 div[role=button] {
 	cursor: pointer;
-	&:hover {
-		color: $accent-color;
+	-webkit-tap-highlight-color: transparent;
+	
+	@media screen and (min-width: $mid-break) {
+		&:hover {
+			color: $accent-color;
+		}
 	}
 }
 

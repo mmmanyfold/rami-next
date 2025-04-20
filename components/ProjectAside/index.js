@@ -104,19 +104,19 @@ const ProjectAside = ({ project, view }) => {
                     <br />
                   </>
                 )}
-                {project.miscellaneous && (
-                  <>
-                    <RichTextCollection objects={project.miscellaneous} />
-                    <br />
-                    <br />
-                  </>
-                )}
                 {hasPress && (
                   <>
                     <LinkWithArrow 
                       href={"/" + project.slug + "/press"} 
                       text="Press"
                     />
+                    <br />
+                    <br />
+                  </>
+                )}
+                {project.miscellaneous && (
+                  <>
+                    <RichTextCollection objects={project.miscellaneous} />
                     <br />
                     <br />
                   </>

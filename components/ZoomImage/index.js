@@ -125,8 +125,7 @@ const ZoomImage = ({ imageBlock, allImageBlocks }) => {
               >
                 <TransformComponent
                   wrapperStyle={{
-                    maxHeight: `${contentHeight}px`,
-                    maxWidth: "100%",
+                    height: `${contentHeight}px`,
                     margin: "auto",
                   }}
                 >
@@ -146,7 +145,7 @@ const ZoomImage = ({ imageBlock, allImageBlocks }) => {
               {zoomImage}
             </div>
           )}
-          <NavArrows 
+          <NavArrows
             onLeftClick={handlePreviousClick}
             onRightClick={handleNextClick}
           />
