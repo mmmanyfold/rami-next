@@ -1,8 +1,8 @@
 "use client";
 import { useState, useEffect } from "react";
 import { useRouter, usePathname } from "next/navigation";
-import ProjectView from "../../../components/ProjectView";
 import { loadData, loadProjects } from "../../api";
+import ProjectView from "../../../components/ProjectView";
 import NavArrows from "../../../components/NavArrows";
 
 function PressPage() {
@@ -11,28 +11,28 @@ function PressPage() {
   const pathname = usePathname();
   const router = useRouter();
 
+  const projectSlug = pathname.split("/")[1];
+
   useEffect(() => {
     const fetchData = async () => {
-      const projectSlug = pathname.split("/")[1];
       const projects = await loadProjects();
       const cvAdditionalRes = await loadData("cv-additional.json");
-      const pressItems = cvAdditionalRes?.data.rows || [];
-
-      const currentProject = projects.find((p) => p?.slug === projectSlug);
+      const cvItems = cvAdditionalRes?.data.rows || [];
+      
       let blocks;
-      if (currentProject) {
-        const pressExhibitions = currentProject.pressExhibitions || [];
-        const pressAdditional = currentProject.pressAdditional || [];
-        const pressIDs = [...pressExhibitions, ...pressAdditional];
-        blocks = pressIDs.map((id) =>
-          pressItems.find((item) => item.uuid === id)
+      const project = projects.find((p) => p?.slug === projectSlug);
+      
+      if (project) {
+        const projectPressIds = project.pressAdditional || [];
+        blocks = projectPressIds.map((id) =>
+          cvItems.find((item) => item.uuid === id)
         );
+        setProject(project);
+        setBlocks(blocks);
       }
-      setProject(currentProject);
-      setBlocks(blocks);
     };
     fetchData();
-  }, [pathname]);
+  }, [projectSlug]);
 
   if (!project) {
     return null;
