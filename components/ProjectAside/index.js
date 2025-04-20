@@ -4,9 +4,18 @@ import "./index.scss";
 
 const ProjectAside = ({ project, view }) => {
   const isSubview = view !== "Project";
-  const hasPress = Boolean(
-    project?.pressExhibitions || project?.pressAdditional
-  );
+
+  const hasLinks = Boolean(
+    project.transcript?.uuid ||
+    project.exhibitionGuide ||
+    project.exhibitionPublication ||
+    project.exhibitionPosters ||
+    project.pressAdditional
+  )
+
+  const shouldShowLastDivider = isSubview || 
+    (project.description?.length && 
+      (hasLinks || project.miscellaneous));
 
   return (
     <>
@@ -43,13 +52,7 @@ const ProjectAside = ({ project, view }) => {
             </>
           )}
 
-          {project.description?.length &&
-            (project.transcript?.uuid ||
-              project.exhibitionGuide ||
-              project.exhibitionPublication ||
-              project.miscellaneous ||
-              project.exhibitionPosters ||
-              hasPress) && <hr />}
+          {shouldShowLastDivider && <hr />}
 
           <div className="links">
             {isSubview ? (
@@ -57,69 +60,57 @@ const ProjectAside = ({ project, view }) => {
             ) : (
               <>
                 {project.transcript?.uuid && (
-                  <>
+                  <div>
                     <LinkWithArrow 
                       href={"/" + project.slug + "/transcript"} 
                       text="Transcript"
                     />
-                    <br />
-                    <br />
-                  </>
+                  </div>
                 )}
                 {project.exhibitionGuide && (
-                  <>
+                  <div>
                     <LinkWithArrow 
                       href={project.exhibitionGuide} 
                       text="Exhibition Guide" 
                       isExternal={true}
                     />
-                    <br />
-                    <br />
-                  </>
+                  </div>
                 )}
                 {project.exhibitionPublication && (
-                  <>
+                  <div>
                     <LinkWithArrow 
                       href={project.exhibitionPublication} 
                       text="Exhibition Publication" 
                       isExternal={true}
                     />
-                    <br />
-                    <br />
-                  </>
+                  </div>
                 )}
                 {project.exhibitionPosters?.length > 0 && (
-                  <>
+                  <div>
                     {project.exhibitionPosters.map(({url}, index) => (
-                      <>
+                      <div key={`${index}-${url}`}>
                         <LinkWithArrow 
-                          key={`${index}-${url}`}
                           href={url} 
                           text={`Exhibition Poster ${index + 1}`} 
                           isExternal={true}
                         />
-                        <br />
-                      </>
+                      </div>
                     ))}
-                    <br />
-                  </>
+                  </div>
                 )}
-                {hasPress && (
-                  <>
+                {project.pressAdditional && (
+                  <div>
                     <LinkWithArrow 
                       href={"/" + project.slug + "/press"} 
                       text="Press"
                     />
-                    <br />
-                    <br />
-                  </>
+                  </div>
                 )}
                 {project.miscellaneous && (
-                  <>
+                  <div>
+                    {hasLinks && <br />}
                     <RichTextCollection objects={project.miscellaneous} />
-                    <br />
-                    <br />
-                  </>
+                  </div>
                 )}
               </>
             )}
