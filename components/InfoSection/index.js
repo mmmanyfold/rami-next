@@ -64,11 +64,11 @@ const ListItem = ({ item }) => {
   );
 };
 
-const InfoSection = ({ name, items }) => {
+const InfoSection = ({ name, items, hideBullets }) => {
   return (
     <section className="info-section">
       {name && <h1>{name}</h1>}
-      <ul>
+      <ul style={hideBullets ? { listStyle: "none" } : {}}>
         {items?.map((item, index) => (
           <ListItem key={index} item={item} />
         ))}

@@ -95,28 +95,29 @@ function InfoPage() {
   switch (activeSection) {
     case "Info":
       content = (
-        <>
+        <div className="general-info-section">
           <section>
             <h1>About</h1>
-            <p>
-              <RichTextCollection objects={bio} />
-            </p>
+            <RichTextCollection objects={bio} />
             <hr />
             <h1>Contact</h1>
-            <p>
-              <a target="_blank" href="mailto:ramigeorge.studio@gmail.com">
-                {"ramigeorge.studio (at) gmail.com"}
-              </a>
-            </p>
+            <a target="_blank" href="mailto:ramigeorge.studio@gmail.com">
+              {"ramigeorge.studio (at) gmail.com"}
+            </a>
           </section>
-          {info &&
-            info.tags.map((tag) => (
+          {info?.tags?.map((tag) => (
+            info.itemsByKey[tag] && (
               <Fragment key={tag}>
                 <hr />
-                <InfoSection name={tag} items={info.itemsByKey[tag]} />
+                <InfoSection 
+                  name={tag} 
+                  items={info.itemsByKey[tag]} 
+                  hideBullets={true}
+                />
               </Fragment>
-            ))}
-        </>
+            )
+          ))}
+        </div>
       );
       break;
     case "Exhibitions & Screenings":
@@ -169,27 +170,27 @@ function InfoPage() {
 
         {/* mobile */}
         <div className="hide-desktop">
-          <section>
+          <section className="general-info-section">
             <h1>About</h1>
-            <p>
-              <RichTextCollection objects={bio} />
-            </p>
+            <RichTextCollection objects={bio} />
             <hr />
             <h1>Contact</h1>
-            <p>
-              <a target="_blank" href="mailto:ramigeorge.studio@gmail.com">
-                {"ramigeorge.studio (at) gmail.com"}
-              </a>
-            </p>
+            <a target="_blank" href="mailto:ramigeorge.studio@gmail.com">
+              {"ramigeorge.studio (at) gmail.com"}
+            </a>
             <hr />
           </section>
 
-          <SectionDrawer
-            name="Current & Forthcoming"
-            type="info"
-            items={info.itemsByKey["Current & Forthcoming"]}
-          />
-          <hr />
+          {info.itemsByKey["Current & Forthcoming"] && (
+            <>
+              <SectionDrawer
+                name="Current & Forthcoming"
+                type="info"
+                items={info.itemsByKey["Current & Forthcoming"]}
+              />
+              <hr />
+            </>
+          )}
 
           <SectionToggle
             label="Exhibitions & Screenings"

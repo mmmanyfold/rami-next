@@ -50,7 +50,11 @@ function CVItem({ title, description, detail, url, download, isNested }) {
 function CVSection({ name, items, isNested }) {
   return (
     <section className="cv-section">
-      {name && <h1 className={isNested ? "nested" : ""}>{name}</h1>}
+      {name && (
+        <h2 className={isNested ? "nested" : ""}>
+          {name}
+        </h2>
+      )}
       <ul className={isNested ? "nested" : ""}>
         {items?.map((item) => (
           <CVItem
