@@ -91,7 +91,7 @@ const ProjectAside = ({ project, view }) => {
                       <div key={`${index}-${url}`}>
                         <LinkWithArrow 
                           href={url} 
-                          text={`Exhibition Poster ${index + 1}`} 
+                          text={`Exhibition Poster${index === 0 ? "" : ` ${index + 1}`}`} 
                           isExternal={true}
                         />
                       </div>
