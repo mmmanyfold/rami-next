@@ -61,10 +61,9 @@ const ProjectAside = ({ project, view }) => {
               <>
                 {project.transcript?.uuid && (
                   <div>
-                    <LinkWithArrow 
-                      href={"/" + project.slug + "/transcript"} 
-                      text="Transcript"
-                    />
+                    <a href={"/" + project.slug + "/transcript"} target="_blank">
+                      Transcript
+                    </a>
                   </div>
                 )}
                 {project.exhibitionGuide && (
@@ -100,10 +99,9 @@ const ProjectAside = ({ project, view }) => {
                 )}
                 {project.pressAdditional && (
                   <div>
-                    <LinkWithArrow 
-                      href={"/" + project.slug + "/press"} 
-                      text="Press"
-                    />
+                    <a href={"/" + project.slug + "/press"}>
+                      Press
+                    </a>
                   </div>
                 )}
                 {project.miscellaneous && (

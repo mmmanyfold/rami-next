@@ -46,7 +46,7 @@ function RichTextObject({ object, color, linkArrow = true }) {
             <a target="_blank" href={linkUrl}>
               <span className={className} style={color ? { color } : {}}>
                 {content}
-              </span>{" "}
+              </span>
               {linkArrow && <CaretUpRight />}
             </a>
           ) : (

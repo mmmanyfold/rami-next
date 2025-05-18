@@ -6,6 +6,7 @@ const CaretUpRight = (props) => (
     viewBox="0 0 220 220"
     width={props.size || 16}
     height={props.size || 16}
+    style={{ marginRight: 3 }}
     {...props}
   >
     <path fill="none" d="M0 0h256v256H0z" />
