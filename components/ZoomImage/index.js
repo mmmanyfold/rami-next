@@ -159,10 +159,12 @@ const ZoomImage = ({ imageBlock, allImageBlocks }) => {
               {zoomImage}
             </div>
           )}
-          <NavArrows
-            onLeftClick={handlePreviousClick}
-            onRightClick={handleNextClick}
-          />
+          {allImageBlocks.length > 1 && (
+            <NavArrows
+              onLeftClick={handlePreviousClick}
+              onRightClick={handleNextClick}
+            />
+          )}
         </Dialog.Content>
       </Dialog.Portal>
     </Dialog.Root>
