@@ -42,7 +42,7 @@ function processCvDataByTag(rows) {
   }
 }
 
-function processCvDataByYear(rows) {
+export function processCvDataByYear(rows) {
   if (!rows) {
     return { itemsByKey: {}, years: [] };
   }
