@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import ProjectsList from "../../../components/ProjectsList";
 import { loadProjects } from "../../api";
-import { useRouter, usePathname } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 function TagPage() {
   const [projects, setProjects] = useState([]);

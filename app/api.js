@@ -16,3 +16,8 @@ export async function loadProjects() {
   const sorted = projects.sort((a, b) => (a.id < b.id ? 1 : -1));
   return sorted;
 }
+
+export async function loadPages() {
+  const res = await loadData("pages.json");
+  return res.data?.rows || [];
+}

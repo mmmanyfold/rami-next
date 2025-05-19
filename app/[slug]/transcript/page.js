@@ -19,20 +19,20 @@ function TranscriptPage() {
     fetchData();
   }, [projectSlug]);
 
+  if (!project) {
+    return null;
+  }
+
   return (
     <>
-      {project && (
-        <>
-          <ProjectView
-            project={project}
-            blocks={project.transcript.blocks}
-            view="Transcript"
-          />
-          <NavArrows 
-            onLeftClick={() => router.push("/" + projectSlug)}
-          />
-        </>
-      )}
+      <ProjectView
+        project={project}
+        blocks={project.transcript.blocks}
+        view="Transcript"
+      />
+      <NavArrows 
+        onLeftClick={() => router.push("/" + projectSlug)}
+      />
     </>
   );
 }
