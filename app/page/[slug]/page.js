@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { loadPages } from "../../api";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { RichTextCollection } from "../../../components/notion";
 import ProjectContent from "../../../components/ProjectContent";
 import NavArrows from "../../../components/NavArrows";
@@ -11,6 +11,7 @@ import "../../../components/ProjectView/index.scss";
 function Page() {
   const [pageData, setPageData] = useState(null);
   const pathname = usePathname();
+  const router = useRouter();
 
   useEffect(() => {
     const fetchData = async () => {
