@@ -7,6 +7,9 @@ import X from "../../icon/X";
 import { BREAKPOINTS } from "../../config/breakpoints";
 import "./index.scss";
 
+const INITIAL_SCALE = 1.5;
+const INITIAL_SCALE_MOBILE = 3;
+
 const isMobile = () => {
   return window.innerWidth < BREAKPOINTS.MID;
 }
@@ -19,6 +22,10 @@ const getImageAlt = (block) => {
   return block.caption?.map(block => block.plain_text).join();
 }
 
+const getInitialZoomScale = () => {
+  return isMobile() ? INITIAL_SCALE_MOBILE : INITIAL_SCALE;
+}
+
 const ZoomImage = ({ imageBlock, allImageBlocks }) => {
   const [contentHeight, setContentHeight] = useState(getContentHeight());
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -27,10 +34,12 @@ const ZoomImage = ({ imageBlock, allImageBlocks }) => {
   
   const [isDragging, setIsDragging] = useState(false);
   const [mouseDownPos, setMouseDownPos] = useState({ x: 0, y: 0 });
+  const [initialScale, setInitialScale] = useState(getInitialZoomScale());
 
   useEffect(() => {
     function handleResize() {
       setContentHeight(getContentHeight());
+      setInitialScale(getInitialZoomScale());
     }
     window.addEventListener("resize", handleResize);
     return (_) => {
@@ -136,7 +145,7 @@ const ZoomImage = ({ imageBlock, allImageBlocks }) => {
                 onTransformationStart={handleTransformStart}
                 onTransformationEnd={handleTransformEnd}
                 centerOnInit={true}
-                initialScale={1.5}
+                initialScale={initialScale}
                 wheel={{ wheelDisabled: true }}
                 panning={{ wheelPanning: true }}
               >
