@@ -1,4 +1,6 @@
 import React from "react";
+import NextImage from "next/image";
+import { assetBaseUrl } from "@/app/api";
 import "./index.scss";
 
 function Project({ title, slug, tags, year, homePageAssets }) {
@@ -22,10 +24,20 @@ function Project({ title, slug, tags, year, homePageAssets }) {
                 alt=""
                 loading="lazy"
               />
-              <img src={files[0].url} alt={title} loading="lazy" />
+              <NextImage 
+                src={`${assetBaseUrl}/${files[0].name}`}
+                alt={title}
+                width={files[0].width}
+                height={files[0].height}
+              />
             </>
           ) : assetType === "Image" && files.length === 1 ? (
-            <img src={files[0].url} alt={title} loading="lazy" />
+            <NextImage 
+              src={`${assetBaseUrl}/${files[0].name}`}
+              alt={title}
+              width={files[0].width}
+              height={files[0].height}
+            />
           ) : null}
         </a>
       </div>

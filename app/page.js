@@ -1,7 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
 import ProjectsList from "@/components/ProjectsList";
-import Footnotes from "@/components/Footnotes";
 import { loadProjects } from "./api";
 
 function Home() {

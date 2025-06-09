@@ -59,11 +59,11 @@ function InfoPage() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const info = await loadData("info.json");
-      const cvAdditional = await loadData("cv-additional.json");
-      const imprint = await loadData("imprint.json");
+      const info = await loadData("/info.json");
+      const cvAdditional = await loadData("/cv-additional.json");
+      const imprint = await loadData("/imprint.json");
       const exhibitionsScreenings = await loadData(
-        "cv-exhibitions-and-screenings.json"
+        "/cv-exhibitions-and-screenings.json"
       );
       setData({
         info: processInfo(info.data.rows),

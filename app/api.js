@@ -1,4 +1,5 @@
-const baseUrl = "https://rami-notion-api.fly.dev/public/";
+const baseUrl = "https://rami-notion-api.fly.dev/public";
+export const assetBaseUrl = `${baseUrl}/assets`;
 
 export async function loadData(endpoint) {
   try {
@@ -11,13 +12,13 @@ export async function loadData(endpoint) {
 }
 
 export async function loadProjects() {
-  const res = await loadData("projects.json");
+  const res = await loadData("/projects.json");
   const projects = res.data?.rows || [];
   const sorted = projects.sort((a, b) => (a.id < b.id ? 1 : -1));
   return sorted;
 }
 
 export async function loadPages() {
-  const res = await loadData("pages.json");
+  const res = await loadData("/pages.json");
   return res.data?.rows || [];
 }

@@ -20,7 +20,7 @@ function PressPage() {
   useEffect(() => {
     const fetchData = async () => {
       const projects = await loadProjects();
-      const cvAdditionalRes = await loadData("cv-additional.json");
+      const cvAdditionalRes = await loadData("/cv-additional.json");
       
       const project = projects.find((p) => p?.slug === projectSlug);
       if (project) {
