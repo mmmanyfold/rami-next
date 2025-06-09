@@ -5,7 +5,7 @@ function CaretRight({ size = 20 }) {
       width={size}
       height={size}
       fill="currentColor"
-      viewBox="0 0 256 256"
+      viewBox="96 0 160 256"
     >
       <rect width="256" height="256" fill="none"></rect>
       <polyline

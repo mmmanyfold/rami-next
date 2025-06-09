@@ -39,7 +39,7 @@ function ProjectsList({ projects }) {
       </div>
 
       {projectsView === "list" ? (
-        <ul className="plain-list">
+        <ul className="plain-list" style={{ padding: "0 0.35rem" }}>
           {!!projects?.length ? (
             projects.map(({ id, title, slug, year, tags }) => {
               const [first, ...rest] = title.split(",");
