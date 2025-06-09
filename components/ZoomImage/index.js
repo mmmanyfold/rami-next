@@ -136,6 +136,9 @@ const ZoomImage = ({ imageBlock, allImageBlocks }) => {
                 onTransformationStart={handleTransformStart}
                 onTransformationEnd={handleTransformEnd}
                 centerOnInit={true}
+                initialScale={1.5}
+                wheel={{ wheelDisabled: true }}
+                panning={{ wheelPanning: true }}
               >
                 <TransformComponent
                   wrapperStyle={{
