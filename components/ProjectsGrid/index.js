@@ -1,6 +1,6 @@
 import React from "react";
 import NextImage from "next/image";
-import { assetBaseUrl } from "@/app/api";
+import { fileWithFallbackUrl } from "@/app/api";
 import "./index.scss";
 
 function Project({ title, slug, tags, year, homePageAssets }) {
@@ -25,7 +25,7 @@ function Project({ title, slug, tags, year, homePageAssets }) {
                 loading="lazy"
               />
               <NextImage 
-                src={`${assetBaseUrl}/${files[0].name}`}
+                src={fileWithFallbackUrl(files[0])}
                 alt={title}
                 width={files[0].width}
                 height={files[0].height}
@@ -33,7 +33,7 @@ function Project({ title, slug, tags, year, homePageAssets }) {
             </>
           ) : assetType === "Image" && files.length === 1 ? (
             <NextImage 
-              src={`${assetBaseUrl}/${files[0].name}`}
+              src={fileWithFallbackUrl(files[0])}
               alt={title}
               width={files[0].width}
               height={files[0].height}

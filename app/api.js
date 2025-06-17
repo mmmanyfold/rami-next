@@ -22,3 +22,13 @@ export async function loadPages() {
   const res = await loadData("/pages.json");
   return res.data?.rows || [];
 }
+
+export function fileWithFallbackUrl(file) {
+  if (typeof file === "string") {
+    return `${assetBaseUrl}/${file}`;
+  }
+  if (file.name) {
+    return `${assetBaseUrl}/${file.name}`;
+  }
+  return file.url;
+}

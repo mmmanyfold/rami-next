@@ -1,5 +1,6 @@
 import { RichTextCollection } from "../notion";
 import LinkWithArrow from "../LinkWithArrow";
+import { fileWithFallbackUrl } from "@/app/api";
 import "./index.scss";
 
 const ProjectAside = ({ project, view }) => {
@@ -69,7 +70,7 @@ const ProjectAside = ({ project, view }) => {
                 {project.exhibitionGuide && (
                   <div>
                     <LinkWithArrow 
-                      href={project.exhibitionGuide} 
+                      href={fileWithFallbackUrl(project.exhibitionGuide)} 
                       text="Exhibition Guide" 
                       isExternal={true}
                     />
@@ -78,7 +79,7 @@ const ProjectAside = ({ project, view }) => {
                 {project.exhibitionPublication && (
                   <div>
                     <LinkWithArrow 
-                      href={project.exhibitionPublication} 
+                      href={fileWithFallbackUrl(project.exhibitionPublication)} 
                       text="Exhibition Publication" 
                       isExternal={true}
                     />
@@ -86,10 +87,10 @@ const ProjectAside = ({ project, view }) => {
                 )}
                 {project.exhibitionPosters?.length > 0 && (
                   <div>
-                    {project.exhibitionPosters.map(({url}, index) => (
-                      <div key={`${index}-${url}`}>
+                    {project.exhibitionPosters.map(({ url, name }, index) => (
+                      <div key={`${index}-${name}`}>
                         <LinkWithArrow 
-                          href={url} 
+                          href={fileWithFallbackUrl({ url, name })} 
                           text={`Exhibition Poster${index === 0 ? "" : ` ${index + 1}`}`} 
                           isExternal={true}
                         />
