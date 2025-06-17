@@ -24,9 +24,6 @@ export async function loadPages() {
 }
 
 export function fileWithFallbackUrl(file) {
-  if (typeof file === "string") {
-    return `${assetBaseUrl}/${file}`;
-  }
   if (file.name) {
     return `${assetBaseUrl}/${file.name}`;
   }
