@@ -1,41 +1,33 @@
-"use client";
 import "../globals.scss";
-import { useState, useEffect, createContext } from "react";
-import Header from "../components/Header";
-import MobileMenu from "../components/MobileMenu";
+import LayoutClient from "./LayoutClient";
 
-export const LayoutContext = createContext(null);
+export const metadata = {
+  title: "Rami George",
+  description: "Archive of Artwork (2011–Present)",
+  openGraph: {
+    title: "Rami George",
+    description: "Archive of Artwork (2011–Present)",
+    url: "ramigeorge.com",
+    siteName: "Rami George",
+    images: [{
+      url: "https://stufff.s3.us-east-1.amazonaws.com/rami-og.png",
+      width: 1200,
+      height: 630,
+      alt: "Rami George",
+    }],
+    locale: "en_US",
+    type: "website",
+  },
+  icons: {
+    icon: "/favicon.png",
+  },
+};
 
 function RootLayout({ children }) {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [projectsView, setProjectsView] = useState("gallery");
-
-  useEffect(() => {
-    const cachedView = sessionStorage.getItem("projectsView");
-    if (cachedView) {
-      setProjectsView(cachedView);
-    }
-  }, []);
-
-  useEffect(() => {
-    sessionStorage.setItem("projectsView", projectsView);
-  }, [projectsView]);
-
-  const toggleMobileMenu = () => {
-    setMobileMenuOpen(!mobileMenuOpen);
-  };
-
   return (
     <html lang="en">
       <body>
-        <LayoutContext.Provider value={{ projectsView, setProjectsView }}>
-          <Header
-            mobileMenuOpen={mobileMenuOpen}
-            toggleMobileMenu={toggleMobileMenu}
-          />
-          <MobileMenu isOpen={mobileMenuOpen} onToggle={toggleMobileMenu} />
-          <main>{children}</main>
-        </LayoutContext.Provider>
+        <LayoutClient>{children}</LayoutClient>
       </body>
     </html>
   );

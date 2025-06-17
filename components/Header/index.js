@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { LayoutContext } from "@/app/layout";
+import { LayoutContext } from "@/app/LayoutClient";
 import "./index.scss";
 
 function Header({ mobileMenuOpen, toggleMobileMenu }) {

@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect, useContext } from "react";
-import { LayoutContext } from "@/app/layout";
+import { LayoutContext } from "@/app/LayoutClient";
 import ProjectsGrid from "../ProjectsGrid";
 import RowsIcon from "../../icon/RowsIcon";
 import GridIcon from "../../icon/GridIcon";
