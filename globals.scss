@@ -160,6 +160,7 @@ main {
     color: $secondary-color;
 	display: flex;
 	align-items: center;
+	user-select: none;
 
     &.desktop {
         display: none;
@@ -193,6 +194,7 @@ main {
     justify-content: space-between;
     background-color: var(--bg-color);
 	z-index: 10;
+	user-select: none;
 }
 
 .description {
