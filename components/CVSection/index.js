@@ -1,12 +1,13 @@
 import { RichTextCollection } from "../notion";
 import CaretUpRight from "@/icon/CaretUpRight";
+import { fileWithFallbackUrl } from "@/app/api";
 import "./index.scss";
 
 function CVItem({ title, description, detail, url, download, isNested }) {
   return (
     <li className={`cv-section ${isNested ? "nested" : ""}`}>
-      {url || download ? (
-        <a target="_blank" href={url || download[0].url}>
+      {url || download?.length ? (
+        <a target="_blank" href={url || fileWithFallbackUrl(download[0])}>
           <span className="title">
             <RichTextCollection objects={title} />
           </span>
