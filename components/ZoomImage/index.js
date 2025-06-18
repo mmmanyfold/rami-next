@@ -26,6 +26,15 @@ const getInitialZoomScale = () => {
   return isMobile() ? INITIAL_SCALE_MOBILE : INITIAL_SCALE;
 }
 
+// Simple debounce function
+const debounce = (func, delay) => {
+  let timeoutId;
+  return (...args) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => func.apply(null, args), delay);
+  };
+};
+
 const ZoomImage = ({ imageBlock, allImageBlocks }) => {
   const [contentHeight, setContentHeight] = useState(getContentHeight());
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -94,6 +103,21 @@ const ZoomImage = ({ imageBlock, allImageBlocks }) => {
     setZoomImageBlock(allImageBlocks[nextIndex]);
     navCallback();
   }, [allImageBlocks, currentZoomIndex])
+
+  useEffect(() => {
+    const handleKeyDown = debounce((event) => {
+      if (event.key === "ArrowLeft" && handlePreviousClick) {
+        handlePreviousClick();
+      } else if (event.key === "ArrowRight" && handleNextClick) {
+        handleNextClick();
+      }
+    }, 150); // 150ms delay to prevent rapid navigation
+    
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [handlePreviousClick, handleNextClick]);
 
   const zoomImage = useMemo(() => (
     <img
