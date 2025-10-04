@@ -1,11 +1,10 @@
 [build]
-  command = "npm run build"
+  command = "npm install --platform=linux --arch=x64 sharp && npm run build"
   publish = ".next"
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
 
 [build.environment]
-  NPM_FLAGS = "--legacy-peer-deps"
-  NEXT_PRIVATE_TARGET = "server"
+  NPM_USE_PRODUCTION = "false"
 
