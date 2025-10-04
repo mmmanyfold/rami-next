@@ -1,12 +1,6 @@
 [build]
-  command = "npm install --cpu=wasm32 sharp && npm run build"
+  command = "npm run build"
   publish = ".next"
-  
-[build.environment]
-  NEXT_SHARP_PATH = "./node_modules/sharp"
-
-[functions]
-  external_node_modules = ["sharp"]
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
