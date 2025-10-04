@@ -1,9 +1,9 @@
 [build]
-  command = "npm install sharp && npm run build"
+  command = "rm -rf node_modules/sharp && npm install --platform=linux --arch=x64 sharp && npm run build"
   publish = ".next"
 
 [build.environment]
-  NODE_VERSION = "18"
+  NODE_VERSION = "18.17.0"
   NPM_FLAGS = "--legacy-peer-deps"
 
 [[plugins]]
