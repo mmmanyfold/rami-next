@@ -26,6 +26,11 @@ export const metadata = {
 function RootLayout({ children }) {
   return (
     <html lang="en">
+      <head>
+        <link rel="preconnect" href="https://fonts.cdnfonts.com" />
+        <link rel="dns-prefetch" href="https://fonts.cdnfonts.com" />
+        <link href="https://fonts.cdnfonts.com/css/neue-haas-grotesk-display-pro" rel="stylesheet" />
+      </head>
       <body>
         <LayoutClient>{children}</LayoutClient>
       </body>
