@@ -1,31 +1,54 @@
-"use client";
-import { useState, useEffect } from "react";
-import ProjectsList from "../../../components/ProjectsList";
 import { loadProjects } from "../../api";
-import { usePathname } from "next/navigation";
+import TagClient from "./TagClient";
 
-function TagPage() {
-  const [projects, setProjects] = useState([]);
-  const pathname = usePathname();
+export async function generateMetadata({ params }) {
+  const tag = params.tag;
+  const isYear = /^\d{4}$/.test(tag);
+  const projects = await loadProjects();
+  
+  let filtered;
+  if (isYear) {
+    filtered = projects.filter((p) => p.year === tag);
+  } else {
+    filtered = projects.filter((p) => p.tags.includes(tag));
+  }
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const projectsData = await loadProjects();
-      const tag = pathname.split("/")[2];
-      const isYear = /^\d{4}$/.test(tag);
+  const title = tag;
+  const description = `Archive of ${tag} projects`;
 
-      let filtered;
-      if (isYear) {
-        filtered = projectsData.filter((p) => p.year === tag);
-      } else {
-        filtered = projectsData.filter((p) => p.tags.includes(tag));
-      }
-      setProjects(filtered);
-    };
-    fetchData();
-  }, [pathname]);
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      url: `projects/${tag}`,
+      siteName: "Rami George",
+      images: [{
+        url: "https://stufff.s3.us-east-1.amazonaws.com/rami-og.png",
+        width: 1200,
+        height: 630,
+        alt: "Rami George",
+      }],
+      locale: "en_US",
+      type: "website",
+    },
+  };
+}
 
-  return <ProjectsList projects={projects} />;
+async function TagPage({ params }) {
+  const projectsData = await loadProjects();
+  const tag = params.tag;
+  const isYear = /^\d{4}$/.test(tag);
+
+  let filtered;
+  if (isYear) {
+    filtered = projectsData.filter((p) => p.year === tag);
+  } else {
+    filtered = projectsData.filter((p) => p.tags.includes(tag));
+  }
+
+  return <TagClient projects={filtered} />;
 }
 
 export default TagPage;

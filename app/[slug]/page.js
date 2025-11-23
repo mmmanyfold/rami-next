@@ -1,59 +1,48 @@
-"use client";
-import ProjectView from "../../components/ProjectView";
-import Footnotes from "../../components/Footnotes";
-import NavArrows from "../../components/NavArrows";
 import { loadProjects } from "../api";
-import { useRouter, usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import ProjectClient from "./ProjectClient";
 
-function ProjectPage() {
-  const [projects, setProjects] = useState(null);
-  const [project, setProject] = useState(null);
-  const [currentIndex, setCurrentIndex] = useState(null);
-  const pathname = usePathname();
-  const router = useRouter();
-
-  useEffect(() => {
-    const fetchProjects = async () => {
-      const projects = await loadProjects();
-      setProjects(projects);
-    };
-    if (!projects) {
-      fetchProjects();
-    }
-  }, [projects]);
-
-  useEffect(() => {
-    if (projects && !!pathname) {
-      const idx = projects.findIndex((p) => p?.slug === pathname.slice(1));
-      setCurrentIndex(idx);
-      setProject(projects[idx]);
-    }
-  }, [projects, pathname]);
+export async function generateMetadata({ params }) {
+  const projects = await loadProjects();
+  const slug = params.slug;
+  const project = projects.find((p) => p?.slug === slug);
 
   if (!project) {
-    return null;
+    return {
+      title: "Project Not Found",
+    };
   }
 
-  const next =
-    currentIndex === projects.length - 1
-      ? projects[0]
-      : projects[currentIndex + 1];
-  const prev =
-    currentIndex === 0
-      ? projects[projects.length - 1]
-      : projects[currentIndex - 1];
+  const title = `${project.title}`;
+  const mediumText = project.medium?.map(m => m.plain_text).join('') || '';
+  const description = mediumText || "Archive of Artwork (2011–Present)";
 
-  return (
-    <>
-      <ProjectView project={project} blocks={project.blocks} />
-      <NavArrows 
-        onLeftClick={() => router.push(prev.slug)}
-        onRightClick={() => router.push(next.slug)}
-      />
-      {projects && <Footnotes projects={projects} />}
-    </>
-  );
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      url: slug,
+      siteName: "Rami George",
+      images: [{
+        url: "https://stufff.s3.us-east-1.amazonaws.com/rami-og.png",
+        width: 1200,
+        height: 630,
+        alt: "Rami George",
+      }],
+      locale: "en_US",
+      type: "website",
+    },
+  };
+}
+
+async function ProjectPage({ params }) {
+  const projects = await loadProjects();
+  const slug = params.slug;
+  const currentIndex = projects.findIndex((p) => p?.slug === slug);
+  const project = projects[currentIndex];
+
+  return <ProjectClient project={project} projects={projects} currentIndex={currentIndex} />;
 }
 
 export default ProjectPage;

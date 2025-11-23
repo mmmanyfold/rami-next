@@ -1,20 +1,33 @@
-"use client";
-import { useState, useEffect } from "react";
-import ProjectsList from "../../components/ProjectsList";
 import { loadProjects } from "../api";
+import ProjectsClient from "./ProjectsClient";
 
-function IndexPage() {
-  const [projects, setProjects] = useState([]);
+export async function generateMetadata() {
+  const projects = await loadProjects();
+  const projectCount = projects.length;
+  
+  return {
+    title: "Projects",
+    description: "Archive of Artwork (2011–Present)",
+    openGraph: {
+      title: "Projects",
+      description: "Archive of Artwork (2011–Present)",
+      url: "projects",
+      siteName: "Rami George",
+      images: [{
+        url: "https://stufff.s3.us-east-1.amazonaws.com/rami-og.png",
+        width: 1200,
+        height: 630,
+        alt: "Rami George",
+      }],
+      locale: "en_US",
+      type: "website",
+    },
+  };
+}
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const projectsData = await loadProjects();
-      setProjects(projectsData);
-    };
-    fetchData();
-  }, []);
-
-  return <ProjectsList projects={projects} />;
+async function IndexPage() {
+  const projects = await loadProjects();
+  return <ProjectsClient projects={projects} />;
 }
 
 export default IndexPage;
