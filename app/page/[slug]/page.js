@@ -1,90 +1,50 @@
-"use client";
-import { useState, useEffect } from "react";
 import { loadPages } from "../../api";
-import { usePathname, useRouter } from "next/navigation";
-import { RichTextCollection } from "../../../components/notion";
-import ProjectContent from "../../../components/ProjectContent";
-import NavArrows from "../../../components/NavArrows";
-import "../../../components/ProjectAside/index.scss";
-import "../../../components/ProjectView/index.scss";
+import PageClient from "./PageClient";
 
-function Page() {
-  const [pageData, setPageData] = useState(null);
-  const pathname = usePathname();
-  const router = useRouter();
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const pages = await loadPages();
-      const slug = pathname.split("/")[2];
-      const pageData = pages.find((p) => p.slug === slug);
-      setPageData(pageData)
-      console.log({pages, slug})
-    };
-    fetchData();
-  }, [pathname]);
+export async function generateMetadata({ params }) {
+  const pages = await loadPages();
+  const slug = params.slug;
+  const pageData = pages.find((p) => p.slug === slug);
 
   if (!pageData) {
-    return null;
+    return {
+      title: "Page Not Found",
+    };
   }
 
-  const { name, project, misc, blocks } = pageData
+  const { name, project, misc } = pageData;
+  console.log({pageData, misc})
+  const title = project?.id ? `${project.title} – ${name}` : `${name}`;
+  const description = misc
+    ? misc[0].plain_text.split("\n")[0]
+    : "";
 
-  const hasProject = Boolean(project.id)
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      url: `page/${slug}`,
+      siteName: "Rami George",
+      images: [{
+        url: "https://stufff.s3.us-east-1.amazonaws.com/rami-og.png",
+        width: 1200,
+        height: 630,
+        alt: "Rami George",
+      }],
+      locale: "en_US",
+      type: "website",
+    },
+  };
+}
 
-  return (
-    <div className="page-content">
-      <aside>
-        {hasProject ? (
-          <div>
-            <sup>({project.id})</sup>
-            <a href={project.slug ? `/${project.slug}` : ""}>
-              <h1 className="title">{project.title}</h1>
-            </a>
-            <div className="meta">
-              <RichTextCollection objects={project.medium} />
-              <div className="tags">
-                {project.tags?.length &&
-                  project.tags.map((tag) => (
-                    <span key={tag}>
-                      <a href={"/projects/" + tag}>{tag}</a>,{" "}
-                    </span>
-                  ))}
-                {project.year && (
-                  <a href={"/projects/" + project.year}>{project.year}</a>
-                )}
-              </div>
-            </div>
-            <hr />
-          </div>
-        ) : (
-          <h1 className="title" style={{ marginTop: 12 }}>
-            {name}
-          </h1>
-        )}
+async function Page({ params }) {
+  const pages = await loadPages();
+  const slug = params.slug;
+  const pageData = pages.find((p) => p.slug === slug);
 
-        <div className="links">
-          {hasProject && name}
-          {misc && (
-            <>
-              <hr />
-              {typeof misc === "string" ? misc : <RichTextCollection objects={misc} />}
-            </>
-          )}
-        </div>
-      </aside>
-
-      <section className="content">
-        <ProjectContent blocks={blocks} />
-      </section>
-
-      {Boolean(project.slug) && (
-        <NavArrows 
-          onLeftClick={() => router.push("/" + project.slug)}
-        />
-      )}
-    </div>
-  );
+  return <PageClient pageData={pageData} />;
 }
 
 export default Page;

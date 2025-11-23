@@ -2,6 +2,7 @@ import "../globals.scss";
 import LayoutClient from "./LayoutClient";
 
 export const metadata = {
+  metadataBase: new URL('https://ramigeorge.com'),
   title: "Rami George",
   description: "Archive of Artwork (2011–Present)",
   openGraph: {
