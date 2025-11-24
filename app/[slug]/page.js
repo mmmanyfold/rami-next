@@ -1,5 +1,6 @@
 import { loadProjects } from "../api";
 import ProjectClient from "./ProjectClient";
+import { defaultMetadata } from "@/config/constants";
 
 export async function generateMetadata({ params }) {
   const projects = await loadProjects();
@@ -7,12 +8,10 @@ export async function generateMetadata({ params }) {
   const project = projects.find((p) => p?.slug === slug);
 
   if (!project) {
-    return {
-      title: "Project Not Found",
-    };
+    return defaultMetadata
   }
 
-  const title = `${project.title}`;
+  const title = project.title;
   const mediumText = project.medium?.map(m => m.plain_text).join('') || '';
   const description = mediumText || "Archive of Artwork (2011–Present)";
 

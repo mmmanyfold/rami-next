@@ -1,5 +1,6 @@
 import { loadPages } from "../../api";
 import PageClient from "./PageClient";
+import { defaultMetadata } from "@/config/constants";
 
 export async function generateMetadata({ params }) {
   const pages = await loadPages();
@@ -7,9 +8,7 @@ export async function generateMetadata({ params }) {
   const pageData = pages.find((p) => p.slug === slug);
 
   if (!pageData) {
-    return {
-      title: "Page Not Found",
-    };
+    return defaultMetadata
   }
 
   const { name, project, misc } = pageData;

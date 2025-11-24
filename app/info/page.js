@@ -6,7 +6,7 @@ import InfoSection from "@/components/InfoSection";
 import SectionToggle from "@/components/SectionToggle";
 import SectionDrawer from "@/components/SectionDrawer";
 import { loadData } from "../api";
-import { processItemsByKey } from "../utils";
+import { processItemsByKey, processCvDataByYear } from "../utils";
 import "./page.scss";
 
 const infoTags = ["Current & Forthcoming"];
@@ -39,17 +39,6 @@ function processCvDataByTag(rows) {
   return { 
     itemsByKey, 
     tags: cvTags 
-  }
-}
-
-export function processCvDataByYear(rows) {
-  if (!rows) {
-    return { itemsByKey: {}, years: [] };
-  }
-  const { itemsByKey, keys } = processItemsByKey(rows, "year");
-  return { 
-    itemsByKey, 
-    years: keys.sort().reverse()
   }
 }
 

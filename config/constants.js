@@ -1,14 +1,10 @@
-import { loadProjects } from "../api";
-import ProjectsClient from "./ProjectsClient";
-
-export async function generateMetadata() {
-  return {
-    title: "Projects",
+export const defaultMetadata = {
+    title: "Rami George",
     description: "Archive of Artwork (2011–Present)",
     openGraph: {
-      title: "Projects",
+      title: "Rami George",
       description: "Archive of Artwork (2011–Present)",
-      url: "projects",
+      url: "ramigeorge.com",
       siteName: "Rami George",
       images: [{
         url: "https://stufff.s3.us-east-1.amazonaws.com/rami-og.png",
@@ -19,12 +15,8 @@ export async function generateMetadata() {
       locale: "en_US",
       type: "website",
     },
+    icons: {
+      icon: "/favicon.png",
+    },
   };
-}
-
-async function IndexPage() {
-  const projects = await loadProjects();
-  return <ProjectsClient projects={projects} />;
-}
-
-export default IndexPage;
+  

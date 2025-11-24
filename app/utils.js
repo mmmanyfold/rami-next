@@ -13,3 +13,14 @@ export const processItemsByKey = (items, key) => {
     { itemsByKey: {}, keys: [] }
   );
 };
+
+export const processCvDataByYear = (rows) => {
+  if (!rows) {
+    return { itemsByKey: {}, years: [] };
+  }
+  const { itemsByKey, keys } = processItemsByKey(rows, "year");
+  return { 
+    itemsByKey, 
+    years: keys.sort().reverse()
+  }
+};

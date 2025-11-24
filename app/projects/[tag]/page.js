@@ -1,6 +1,8 @@
 import { loadProjects } from "../../api";
 import TagClient from "./TagClient";
 
+const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
+
 export async function generateMetadata({ params }) {
   const tag = params.tag;
   const isYear = /^\d{4}$/.test(tag);
@@ -13,8 +15,8 @@ export async function generateMetadata({ params }) {
     filtered = projects.filter((p) => p.tags.includes(tag));
   }
 
-  const title = tag;
-  const description = `Archive of ${tag} projects`;
+  const title = isYear ? tag : capitalize(tag);
+  const description = `Archive of Artwork - ${tag}`;
 
   return {
     title,

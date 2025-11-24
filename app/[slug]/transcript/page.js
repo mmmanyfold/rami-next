@@ -1,40 +1,50 @@
-"use client";
-import { useEffect, useState } from "react";
-import ProjectView from "../../../components/ProjectView";
 import { loadProjects } from "../../api";
-import { usePathname, useRouter } from "next/navigation";
-import NavArrows from "../../../components/NavArrows";
+import TranscriptClient from "./TranscriptClient";
+import { defaultMetadata } from "@/config/constants";
+import "../../../components/ProjectView/index.scss";
 
-function TranscriptPage() {
-  const [project, setProject] = useState(null);
-  const pathname = usePathname();
-  const router = useRouter();
-  const projectSlug = pathname.split("/")[1];
+export async function generateMetadata({ params }) {
+  const projects = await loadProjects();
+  const slug = params.slug;
+  const project = projects.find((p) => p?.slug === slug);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const projects = await loadProjects();
-      setProject(projects.find((p) => p?.slug === projectSlug));
-    };
-    fetchData();
-  }, [projectSlug]);
+  if (!project) {
+    return defaultMetadata;
+  }
 
+  const title = project.title;
+  const description = "Video transcript";
+
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      url: slug,
+      siteName: "Rami George",
+      images: [{
+        url: "https://stufff.s3.us-east-1.amazonaws.com/rami-og.png",
+        width: 1200,
+        height: 630,
+        alt: "Rami George",
+      }],
+      locale: "en_US",
+      type: "website",
+    },
+  };
+}
+
+async function TranscriptPage({ params }) {
+  const projects = await loadProjects();
+  const slug = params.slug;
+  const project = projects.find((p) => p?.slug === slug);
+  
   if (!project) {
     return null;
   }
 
-  return (
-    <>
-      <ProjectView
-        project={project}
-        blocks={project.transcript.blocks}
-        view="Transcript"
-      />
-      <NavArrows 
-        onLeftClick={() => router.push("/" + projectSlug)}
-      />
-    </>
-  );
+  return <TranscriptClient project={project} />;
 }
 
 export default TranscriptPage;
