@@ -1,4 +1,4 @@
-import { loadData, loadProjects } from "../../api";
+import { loadData, loadProjects, fileWithFallbackUrl } from "../../api";
 import { processCvDataByYear } from "../../utils";
 import PressClient from "./PressClient";
 import { defaultMetadata } from "@/config/constants";
@@ -16,6 +16,14 @@ export async function generateMetadata({ params }) {
   const title = project.title;
   const description = "Press";
 
+  const hasImageAsset = project.homePageAssets?.type === "Image";
+  const projectImage = hasImageAsset ? project.homePageAssets?.files?.[0] : null;
+  const imageUrl = projectImage 
+    ? fileWithFallbackUrl(projectImage)
+    : "https://stufff.s3.us-east-1.amazonaws.com/rami-og.png";
+  const imageWidth = projectImage?.width || 1200;
+  const imageHeight = projectImage?.height || 630;
+
   return {
     title,
     description,
@@ -25,10 +33,10 @@ export async function generateMetadata({ params }) {
       url: slug,
       siteName: "Rami George",
       images: [{
-        url: "https://stufff.s3.us-east-1.amazonaws.com/rami-og.png",
-        width: 1200,
-        height: 630,
-        alt: "Rami George",
+        url: imageUrl,
+        width: imageWidth,
+        height: imageHeight,
+        alt: title,
       }],
       locale: "en_US",
       type: "website",

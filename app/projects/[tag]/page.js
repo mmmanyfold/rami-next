@@ -16,7 +16,7 @@ export async function generateMetadata({ params }) {
   }
 
   const title = isYear ? tag : capitalize(tag);
-  const description = `Archive of Artwork - ${tag}`;
+  const description = `Archive of Artwork – ${tag}`;
 
   return {
     title,
