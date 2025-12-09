@@ -3,7 +3,9 @@ export const assetBaseUrl = `${baseUrl}/assets`;
 
 export async function loadData(endpoint) {
   try {
-    const res = await fetch(baseUrl + endpoint);
+    const res = await fetch(baseUrl + endpoint, {
+      next: { revalidate: 60 } // Revalidate every 60 seconds
+    });
     const json = await res.json();
     return { data: json };
   } catch (e) {

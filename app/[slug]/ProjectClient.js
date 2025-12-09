@@ -1,5 +1,4 @@
 "use client";
-import { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
 import NavArrows from "../../components/NavArrows";
