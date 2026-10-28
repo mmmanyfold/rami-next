@@ -90,8 +90,8 @@ function InfoPage() {
             <RichTextCollection objects={bio} />
             <hr />
             <h1>Contact</h1>
-            <a target="_blank" href="mailto:ramigeorge.studio@gmail.com">
-              {"ramigeorge.studio (at) gmail.com"}
+            <a target="_blank" href="mailto:rami.m.george@gmail.com">
+              {"rami.m.george (at) gmail.com"}
             </a>
           </section>
           {info?.tags?.map((tag) => (
